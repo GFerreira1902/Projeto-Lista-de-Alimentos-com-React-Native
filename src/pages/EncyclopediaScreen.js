@@ -3,8 +3,7 @@ import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
 import FooterBar from '../components/FooterBar';
 
 const windowWidth = Dimensions.get('window').width;
-
-const data = require('../../dados.json'); // Importe os dados do arquivo JSON
+const data = require('../../dados.json');
 
 const renderCard = ({ item }) => {
     return (
