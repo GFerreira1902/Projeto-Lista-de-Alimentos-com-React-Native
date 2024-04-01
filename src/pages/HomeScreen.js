@@ -5,7 +5,7 @@ import FooterBar from '../components/FooterBar';
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Conteúdo da Nova Página</Text>
+      <Text></Text>
       <FooterBar />
     </View>
   );
