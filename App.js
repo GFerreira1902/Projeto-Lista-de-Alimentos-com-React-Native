@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import InitialScreen from "./src/pages/InitialScreen";
-import HomeScreen from "./src/pages/HomeScreen";
-import EncyclopediaScreen from "./src/pages/EncyclopediaScreen";
+import InitialPage from "./src/pages/InitialPage";
+import HomePage from "./src/pages/HomePage";
+import EncyclopediaPage from "./src/pages/EncyclopediaPage";
 import HeaderBar from "./src/components/HeaderBar";
 
 const Stack = createStackNavigator();
@@ -13,22 +13,22 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-          name="InitialScreen" 
-          component={InitialScreen} 
+          name="InitialPage" 
+          component={InitialPage} 
           options={{
             header: () => <HeaderBar />,
           }}  
         />
         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+          name="HomePage"
+          component={HomePage}
           options={{
             header: () => <HeaderBar />,
           }}
         /> 
         <Stack.Screen
-          name="EncyclopediaScreen"
-          component={EncyclopediaScreen}
+          name="EncyclopediaPage"
+          component={EncyclopediaPage}
           options={{
             header: () => <HeaderBar />,
           }}
