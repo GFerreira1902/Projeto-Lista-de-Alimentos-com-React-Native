@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import FooterBar from '../components/FooterBar';
+//import dados from '../../dados.json';
+import {data} from '../../dados';
 
 const windowWidth = Dimensions.get('window').width;
-const data = require('../../dados.json');
-const defaultImagePath = require('../../assets/images/alimentos/imgteste2.png');
 
 const EncyclopediaPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -22,7 +22,7 @@ const EncyclopediaPage = () => {
       <TouchableOpacity onPress={() => openModal(item)}>
         <View style={styles.card}>
           <Text style={styles.cardText}>{item.alimento}</Text>
-          <Image source={defaultImagePath} style={styles.image} />
+          <Image source={item.path_image}  style={styles.image} />
         </View>
       </TouchableOpacity>
     );
@@ -62,11 +62,11 @@ const EncyclopediaPage = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{selectedItem?.alimento}</Text>
-            <Image source={defaultImagePath} style={styles.modalImage} />
+            <Image source={selectedItem?.path_image} style={styles.modalImage} />
             <View style={styles.healthIndicatorContainer}>
               {renderHealthIndicator(selectedItem?.classificacao_saude)}
             </View>
-            <Text style={styles.modalDescription}>{selectedItem?.descrição}</Text>
+            <Text style={styles.modalDescription}>{selectedItem?.descricao}</Text>
             <TouchableOpacity onPress={closeModal}>
               <Text style={styles.closeButton}>Fechar</Text>
             </TouchableOpacity>

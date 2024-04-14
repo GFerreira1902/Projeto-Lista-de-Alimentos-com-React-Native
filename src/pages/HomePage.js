@@ -2,10 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, Modal, useWindowDimensions } from 'react-native';
 import FooterBar from '../components/FooterBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {data} from '../../dados'
 
 const windowWidth = Dimensions.get('window').width;
-const data = require('../../dados.json');
-const defaultImagePath = require('../../assets/images/alimentos/imgteste2.png');
 const imgFeedbackGood = require('../../assets/images/feedback/facefeliz.png')
 const imgFeedbackModerado = require('../../assets/images/feedback/facemoderada.png')
 const imgFeedbackBad = require('../../assets/images/feedback/facetriste.png')
@@ -170,7 +169,7 @@ const HomePage = () => {
                     onLongPress={() => handleToggleItemSelectedModal(item.id)}
                   >
                     <View style={[styles.itemContainer, isItemSelectedModal(item.id) && styles.selectedItemCart]}>
-                      <Image source={defaultImagePath} style={styles.itemImage} />
+                      <Image source={item.path_image} style={styles.itemImage} />
                       <Text style={styles.itemText}>{item.alimento}</Text>
                     </View>
                   </TouchableOpacity>
@@ -303,7 +302,7 @@ const HomePage = () => {
           >
             <View style={[styles.card, isItemSelected(item.id) && styles.selectedCard]}>
               <Text style={styles.cardText}>{item.alimento}</Text>
-              <Image source={defaultImagePath} style={styles.image} />
+              <Image source={item.path_image} style={styles.image} />
             </View>
           </TouchableOpacity>
         )}
