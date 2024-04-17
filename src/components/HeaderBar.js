@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const HeaderBar = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>NOME DO APP</Text>
+      <Text style={styles.title}>KOMIDINHAZ</Text>
     </View>
   );
 };

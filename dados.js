@@ -4,7 +4,7 @@ export const data = [
         alimento: "Banana",
         descricao: "fruta muito saborosa e saudável. E rica em potássio, que deixa os músculos e ossos fortes.",
         classificacao_saude: "saudavel",
-        path_image: require("./assets/images/alimentos/banana.jpg")
+        path_image: require("./assets/images/alimentos/banana.png")
     },
     {
         id: 2,
@@ -17,15 +17,15 @@ export const data = [
         id: 3,
         alimento: "Uva",
         descricao: "Tírutinha muito gostosa. Vem em cachos com varias dela. Possui muitos carboidratos, dando bastante energia pro corpo.",
-        classificacao_saude: "moderado",
-        path_image: require("./assets/images/alimentos/uva.jpg")
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/uva.png")
     },
     {
         id: 4,
         alimento: "Mamão",
         descricao: "fruta doce e muito gostosa. É muito boa para melhorar a digestão e combater a prisão de ventre.",
         classificacao_saude: "saudavel",
-        path_image: require("./assets/images/alimentos/imgteste2.png")
+        path_image: require("./assets/images/alimentos/mamao.png")
     },
     {
         id: 5,
@@ -53,7 +53,7 @@ export const data = [
         alimento: "Morango",
         descricao: "muito gostoso e uma das frutas mais famosas e gostosas. O morango possui muita vitamina C e potássio.",
         classificacao_saude: "saudavel",
-        path_image: require("./assets/images/alimentos/morango.jpg")
+        path_image: require("./assets/images/alimentos/morango.png")
     },
     {
         id: 9,
@@ -137,21 +137,21 @@ export const data = [
         alimento: "Cachorro-quente",
         descricao: "alimento que coloca-se salsicha dentro do pão, além de outros ingredientes, e é muito gostoso. Possui alto teor calórico e bastante sódio.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/imgteste2.png")
+        path_image: require("./assets/images/alimentos/cachorroquente.png")
     },
     {
         id: 21,
         alimento: "Sorvete",
         descricao: "doce gelado feito a partir do leite, com diversos sabores. Os sorvetes processados possuem muita gordura e açúcares.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/imgteste2.png")
+        path_image: require("./assets/images/alimentos/sorvete.png")
     },
     {
         id: 22,
         alimento: "Achocolatado",
         descricao: "mistura de leite com pó de cacau. Possui conservantes e muitos açúcares.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/imgteste2.png")
+        path_image: require("./assets/images/alimentos/achocolatado.png")
     },
     {
         id: 23,
@@ -249,7 +249,7 @@ export const data = [
         alimento: "Queijo",
         descricao: "Alimento muito gostoso feito do leite. Possui muitas proteínas e cálcio que é bom para os ossos, além de ajudar no bom funcionamento do intestino.",
         classificacao_saude: "moderado",
-        path_image: require("./assets/images/alimentos/queijo.jpg")
+        path_image: require("./assets/images/alimentos/queijo.png")
     },
     {
         id: 37,
@@ -263,7 +263,7 @@ export const data = [
         alimento: "Pão de queijo",
         descricao: "pãozinho muito gostoso feito de polvilho e queijo. Possui carboidratos e vitaminas.",
         classificacao_saude: "moderado",
-        path_image: require("./assets/images/alimentos/paodequeijo.jpg")
+        path_image: require("./assets/images/alimentos/paodequeijo.png")
     },
     {
         id: 39,

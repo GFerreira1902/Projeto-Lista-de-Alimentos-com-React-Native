@@ -16,6 +16,10 @@ const FooterBar = ({ cartItemCount }) => {
         navigation.navigate("EncyclopediaPage");
     };
 
+    const handleConfigPress = () => {
+        navigation.navigate("ConfigPage");
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleHomePress}>
@@ -34,7 +38,9 @@ const FooterBar = ({ cartItemCount }) => {
                     )}
                 </View>
             </TouchableOpacity> */}
-            <Ionicons name="settings" size={30} color="white" />
+            <TouchableOpacity onPress={handleConfigPress}>
+                <Ionicons name="settings" size={30} color="white" /> 
+            </TouchableOpacity>
         </View> 
     ); 
 };

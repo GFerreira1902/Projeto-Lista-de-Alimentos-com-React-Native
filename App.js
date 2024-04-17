@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import InitialPage from "./src/pages/InitialPage";
 import HomePage from "./src/pages/HomePage";
 import EncyclopediaPage from "./src/pages/EncyclopediaPage";
+import ConfigPage from "./src/pages/ConfigPage";
 import HeaderBar from "./src/components/HeaderBar";
 
 const Stack = createStackNavigator();
@@ -29,6 +30,13 @@ const App = () => {
         <Stack.Screen
           name="EncyclopediaPage"
           component={EncyclopediaPage}
+          options={{
+            header: () => <HeaderBar />,
+          }}
+        />
+        <Stack.Screen
+          name="ConfigPage"
+          component={ConfigPage}
           options={{
             header: () => <HeaderBar />,
           }}

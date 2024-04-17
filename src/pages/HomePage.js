@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, Modal, useWindowDimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import FooterBar from '../components/FooterBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {data} from '../../dados'
@@ -10,6 +11,7 @@ const imgFeedbackModerado = require('../../assets/images/feedback/facemoderada.p
 const imgFeedbackBad = require('../../assets/images/feedback/facetriste.png')
 
 const HomePage = () => {
+  const navigation = useNavigation();
   const [selectedItems, setSelectedItems] = useState([]);
   const [randomizedData, setRandomizedData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -210,6 +212,8 @@ const HomePage = () => {
       setSelectedItems([]);
       // Fechar a modal de feedback
       setIsSecondModalVisible(false);
+      navigation.navigate('InitialPage');
+
     };
   
     return (
