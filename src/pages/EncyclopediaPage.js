@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image, TextInput } from 'react-native';
+import Octicons from 'react-native-vector-icons/Octicons';
 import FooterBar from '../components/FooterBar';
-//import dados from '../../dados.json';
-import {data} from '../../dados';
+import { data } from '../../dados';
 
 const windowWidth = Dimensions.get('window').width;
 
 const EncyclopediaPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterOption, setFilterOption] = useState(null);
+  const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   const openModal = (item) => {
     setSelectedItem(item);
@@ -22,7 +26,7 @@ const EncyclopediaPage = () => {
       <TouchableOpacity onPress={() => openModal(item)}>
         <View style={styles.card}>
           <Text style={styles.cardText}>{item.alimento}</Text>
-          <Image source={item.path_image}  style={styles.image} />
+          <Image source={item.path_image} style={styles.image} />
         </View>
       </TouchableOpacity>
     );
@@ -48,11 +52,61 @@ const EncyclopediaPage = () => {
     return <View style={[styles.healthIndicator, { backgroundColor }]} />;
   };
 
+  const filteredData = data
+    .filter(item => item.alimento.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => {
+      switch (filterOption) {
+        case 'AZ':
+          return a.alimento.localeCompare(b.alimento);
+        case 'ZA':
+          return b.alimento.localeCompare(a.alimento);
+        default:
+          return 0;
+      }
+    });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enciclopédia Dos Alimentos</Text>
-      <FlatList 
-        data={data}
+      <View style={styles.searchBar}>
+        <View style={styles.searchInputContainer}>
+          <Octicons name="search" size={20} color="#9E9E9E" style={styles.searchIcon} />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Pesquisar Alimento"
+            placeholderTextColor="#9E9E9E"
+            onChangeText={setSearchQuery}
+            value={searchQuery}
+          />
+        </View>
+        <TouchableOpacity onPress={() => setIsFilterModalVisible(true)}>
+          <Octicons name="filter" size={24} color="red" style={styles.filterIcon} />
+        </TouchableOpacity>
+      </View>
+      <Modal visible={isFilterModalVisible} animationType="slide" transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity onPress={() => { setFilterOption('AZ'); setSelectedFilter('AZ'); setIsFilterModalVisible(false); }}>
+              <View style={styles.filterOptionContainer}>
+                <Text style={styles.filterOption}>Ordem Alfabética: A-Z</Text>
+                {selectedFilter === 'AZ' && <Octicons name="check" size={20} color="red" />}
+              </View>
+            </TouchableOpacity>
+            <View style={styles.separator}></View>
+            <TouchableOpacity onPress={() => { setFilterOption('ZA'); setSelectedFilter('ZA'); setIsFilterModalVisible(false); }}>
+              <View style={styles.filterOptionContainer}>
+                <Text style={styles.filterOption}>Ordem Alfabética: Z-A</Text>
+                {selectedFilter === 'ZA' && <Octicons name="check" size={20} color="red" />}
+              </View>
+            </TouchableOpacity>
+            <View style={styles.separator}></View>
+            <TouchableOpacity onPress={() => setIsFilterModalVisible(false)}>
+              <Text style={styles.closeButton}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      <FlatList
+        data={filteredData}
         renderItem={renderCard}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
@@ -84,11 +138,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 5,
-    marginBottom: 5
+  searchBar: {
+    width: '100%',
+    backgroundColor: '#F5F5F5',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchInputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+  searchInput: {
+    backgroundColor: '#E0E0E0',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    flex: 1,
+  },
+  filterIcon: {
+    marginLeft: 10,
   },
   flatListContent: {
     paddingHorizontal: 10,
@@ -133,22 +207,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     width: '80%',
-    alignItems: 'center',
   },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  filterOptionContainer: {
+    flexDirection: 'row',
   },
-  modalImage: {
-    width: 200,
-    height: 200,
-    resizeMode: 'contain',
-    marginBottom: 10,
-  },
-  modalDescription: {
+  filterOption: {
     fontSize: 16,
     textAlign: 'center',
+    marginBottom: 20,
+    paddingRight: 20,
+  },
+  separator: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
     marginBottom: 20,
   },
   closeButton: {

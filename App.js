@@ -17,28 +17,28 @@ const App = () => {
           name="InitialPage" 
           component={InitialPage} 
           options={{
-            header: () => <HeaderBar />,
+            header: () => <HeaderBar title="KOMIDINHAZ"/>,
           }}  
         />
         <Stack.Screen
           name="HomePage"
           component={HomePage}
           options={{
-            header: () => <HeaderBar />,
+            header: () => <HeaderBar title="KOMIDINHAZ"/>,
           }}
         /> 
         <Stack.Screen
           name="EncyclopediaPage"
           component={EncyclopediaPage}
           options={{
-            header: () => <HeaderBar />,
+            header: () => <HeaderBar title="ENCICLOPÉDIA DOS ALIMENTOS"/>,
           }}
         />
         <Stack.Screen
           name="ConfigPage"
           component={ConfigPage}
           options={{
-            header: () => <HeaderBar />,
+            header: () => <HeaderBar title="CONFIGURAÇÕES"/>,
           }}
         />
       </Stack.Navigator>
