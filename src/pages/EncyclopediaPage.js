@@ -83,8 +83,8 @@ const EncyclopediaPage = () => {
         </TouchableOpacity>
       </View>
       <Modal visible={isFilterModalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+        <View style={styles.modalContainerFilter}>
+          <View style={styles.modalContentFilter}>
             <TouchableOpacity onPress={() => { setFilterOption('AZ'); setSelectedFilter('AZ'); setIsFilterModalVisible(false); }}>
               <View style={styles.filterOptionContainer}>
                 <Text style={styles.filterOption}>Ordem Alfabética: A-Z</Text>
@@ -202,11 +202,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
+  modalContentFilter: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+  },
+  modalContainerFilter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
   modalContent: {
     backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,
     width: '80%',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalImage: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 10,
+  },
+  modalDescription: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
   },
   filterOptionContainer: {
     flexDirection: 'row',
