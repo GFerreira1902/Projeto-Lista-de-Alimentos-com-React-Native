@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, Modal, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Octicons from 'react-native-vector-icons/Octicons';
 import FooterBar from '../components/FooterBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {data} from '../../dados'
@@ -18,6 +19,8 @@ const HomePage = () => {
   const [isSecondModalVisible, setIsSecondModalVisible] = useState(false);
   const windowDimensions = useWindowDimensions();
   const [selectedItemToDelete, setSelectedItemToDelete] = useState(null);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showConfirmationDeleteItensModal, setShowConfirmationDeleteItensModal] = useState(false);
 
   useEffect(() => {
     getSavedItems();
@@ -61,6 +64,10 @@ const HomePage = () => {
     setIsModalVisible(true);
   };
 
+  const handleFinishGame = () => {
+    setIsSecondModalVisible(true);
+  };
+
   const randomizeData = () => {
     const shuffledData = [...data].sort(() => Math.random() - 0.5);
     const randomizedItems = {
@@ -101,6 +108,19 @@ const HomePage = () => {
     setIsModalVisible(false); // Fechar a modal após excluir o item
   };
 
+  // Verifique se há itens não saudáveis selecionados
+  const hasUnhealthyItems = useMemo(() => {
+    return modalItemList.some(item => item.classificacao_saude === 'nao_saudavel');
+  }, [modalItemList]);
+
+  // Exiba o texto "Poderia Retirar" apenas se houver itens não saudáveis selecionados
+  const renderPoderiaRetirarText = () => {
+    if (hasUnhealthyItems) {
+      return <Text style={styles.additionalItemsBadTitle}>Poderia Retirar</Text>;
+    }
+    return null;
+  };
+
   const healthPercentage = useMemo(() => {
     const totalSelected = modalItemList.length;
     const healthyItems = modalItemList.filter(item => item.classificacao_saude === 'saudavel').length;
@@ -117,7 +137,7 @@ const HomePage = () => {
     additionalItems = getRandomHealthyItems();
   } else if (healthPercentage >= 50) {
     message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
-    additionalItems = getModerateAndUnhealthyItems();
+    additionalItems = getUnhealthyItems();
   } else {
     message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
     additionalItems = getRandomHealthyItems();
@@ -144,16 +164,68 @@ const HomePage = () => {
   
     return additionalHealthyItems;
   }
-  
-  
 
-  function getModerateAndUnhealthyItems() {
+  function getUnhealthyItems() {
     const selectedItemsData = randomizedData.filter(item => selectedItems.includes(item.id));
-    const moderateAndUnhealthyItems = selectedItemsData.filter(item => item.classificacao_saude !== 'saudavel');
-    return moderateAndUnhealthyItems.slice(0, 4);
+    const unhealthyItems = selectedItemsData.filter(item => item.classificacao_saude !== 'saudavel' && item.classificacao_saude !== 'moderado');
+    return unhealthyItems.slice(0, 4);
   };
 
   const SelectedItemsModal = () => {
+    const [selectedItemsToDelete, setSelectedItemsToDelete] = useState([]); // Estado para armazenar os itens selecionados para exclusão
+    const [showTrashIcon, setShowTrashIcon] = useState(false); // Estado para controlar a exibição do ícone de lixeira
+  
+    const handleToggleItemToDelete = (itemId) => {
+      // Verifica se o item já está na lista de itens selecionados para exclusão
+      const isSelected = selectedItemsToDelete.includes(itemId);
+    
+      // Se não houver mais itens selecionados, esconde a lixeira
+      if (selectedItemsToDelete.length === 0) {
+        setShowTrashIcon(false);
+      }
+    
+      // Atualiza a lista de itens selecionados para exclusão
+      setSelectedItemsToDelete((prevItems) => {
+        if (isSelected) {
+          // Se o item já estiver selecionado, remove-o da lista
+          const updatedItems = prevItems.filter((id) => id !== itemId);
+          return updatedItems;
+        } else {
+          // Se o item não estiver selecionado, adiciona-o à lista
+          setShowTrashIcon(true); // Exibe a lixeira após o primeiro item ser selecionado
+          return [...prevItems, itemId];
+        }
+      });
+    };
+  
+    const handleLongPress = (itemId) => {
+      // Seleciona o item após o long press e permite a seleção de outros itens com um único clique
+      setSelectedItemsToDelete([itemId]);
+      setShowTrashIcon(true); // Mostra o ícone de lixeira após um long press
+    };
+  
+    const handleToggleItemSelection = (itemId) => {
+      // Adiciona ou remove itens da lista de itens selecionados para exclusão após um clique simples
+      if (selectedItemsToDelete.includes(itemId)) {
+        setSelectedItemsToDelete(prevItems => prevItems.filter(id => id !== itemId));
+      } else {
+        setSelectedItemsToDelete(prevItems => [...prevItems, itemId]);
+        setShowTrashIcon(true); // Mostra o ícone de lixeira quando um item é selecionado
+      }
+    };
+  
+    const handleDeleteSelectedItems = () => {
+      // Remove os itens selecionados da lista de itens selecionados
+      setSelectedItems(prevItems => prevItems.filter(id => !selectedItemsToDelete.includes(id)));
+    
+      // Limpa a lista de itens selecionados para exclusão e oculta o ícone da lixeira
+      setSelectedItemsToDelete([]);
+      setShowTrashIcon(false);
+      setIsModalVisible(false); // Fechar a modal após a exclusão dos itens
+    };
+  
+    const selectedItemsCount = selectedItemsToDelete.length; // Número de itens selecionados para exclusão
+  
     return (
       <Modal
         transparent={true}
@@ -162,38 +234,37 @@ const HomePage = () => {
       >
         <View style={styles.modalContainer}>
           <View style={[styles.modalContent, { maxHeight: windowDimensions.height * 0.8 }]}>
-            <Text style={styles.modalTitle}>Itens Selecionados</Text>
+            <View style={styles.header}>
+              <Text style={styles.modalTitle}>Itens Selecionados</Text>
+              {selectedItemsCount > 0 && showTrashIcon && ( // Mostra o ícone de lixeira apenas se houver itens selecionados e o estado showTrashIcon for verdadeiro
+                <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteSelectedItems}>
+                  <Octicons name="trash" size={24} color="white" />
+                  <Text style={styles.deleteButtonText}>{selectedItemsCount}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
             <FlatList
               data={modalItemList}
               renderItem={({ item }) => (
-                <View>
-                  <TouchableOpacity
-                    onLongPress={() => handleToggleItemSelectedModal(item.id)}
-                  >
-                    <View style={[styles.itemContainer, isItemSelectedModal(item.id) && styles.selectedItemCart]}>
-                      <Image source={item.path_image} style={styles.itemImage} />
-                      <Text style={styles.itemText}>{item.alimento}</Text>
-                    </View>
-                  </TouchableOpacity>
-                  {isItemSelectedModal(item.id) && (
-                    <TouchableOpacity onPress={handleDeleteItem}>
-                      <Text style={styles.deleteButtonText}>Excluir item</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
+                <TouchableOpacity
+                  onLongPress={() => handleToggleItemToDelete(item.id)} // Opção de excluir acionada com um long press
+                >
+                  <View style={[styles.itemContainer, selectedItemsToDelete.includes(item.id) && styles.selectedItemCart]}>
+                    <Image source={item.path_image} style={styles.itemImage} />
+                    <Text style={[styles.itemText, selectedItemsToDelete.includes(item.id) && { color: 'black' }]}>{item.alimento}</Text>
+                  </View>
+                </TouchableOpacity>
               )}
               keyExtractor={(item) => item.id.toString()}
             />
-            <>
-              <TouchableOpacity style={styles.finishGameButton} onPress={() => {
-                setIsSecondModalVisible(true); // Abrir a segunda modal
-              }}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.finishGameButton} onPress={() => setShowConfirmationModal(true)}>
                 <Text style={styles.finishGameButtonText}>Finalizar Jogo</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.closeButton} onPress={() => setIsModalVisible(false)}>
                 <Text style={styles.closeButtonText}>Fechar</Text>
               </TouchableOpacity>
-            </>           
+            </View>
           </View>
         </View>
       </Modal>
@@ -235,9 +306,9 @@ const HomePage = () => {
             {healthPercentage < 100 && healthPercentage >= 75 && (
               <>
                 <Image source={imgFeedbackGood} />
-                <Text style={styles.additionalItemsBadTitle}>Poderia Retirar</Text>
+                {renderPoderiaRetirarText()}
                 <FlatList
-                  data={getModerateAndUnhealthyItems()}
+                  data={getUnhealthyItems()}
                   renderItem={({ item }) => (
                     <View style={styles.itensFeedback}>
                       <Text>{item.alimento}</Text>
@@ -260,9 +331,9 @@ const HomePage = () => {
                   )}
                   keyExtractor={(item) => (item.id ? item.id.toString() : null)} // Verifica se item.id é nulo ou indefinido antes de chamar toString()
                 />
-                <Text style={styles.additionalItemsBadTitle}>Poderia Retirar</Text>
+                {renderPoderiaRetirarText()}
                 <FlatList
-                  data={getModerateAndUnhealthyItems()} // Filtrar os itens selecionados que não são saudáveis
+                  data={getUnhealthyItems()} // Filtrar os itens selecionados que não são saudáveis
                   renderItem={({ item }) => (
                     <View style={styles.itensFeedback}>
                       <Text>{item.alimento}</Text>
@@ -290,6 +361,72 @@ const HomePage = () => {
             <TouchableOpacity style={styles.playAgainButton} onPress={handlePlayAgain}>
               <Text style={styles.playAgainButtonText}>Jogar Novamente</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+
+  const ConfirmationModal = () => {
+    return (
+      <Modal
+        transparent={true}
+        visible={showConfirmationModal}
+        onRequestClose={() => setShowConfirmationModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={[styles.modalContent, { maxHeight: windowDimensions.height * 0.4 }]}>
+            <Text style={styles.modalConfirmationText}>Tem certeza de que deseja finalizar o jogo?</Text>
+            <View style={styles.modalButtonsContainer}>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.confirmButton]}
+                onPress={() => {
+                  setShowConfirmationModal(false);
+                  handleFinishGame();
+                }}
+              >
+                <Text style={styles.modalButtonText}>Sim</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.cancelButton]}
+                onPress={() => setShowConfirmationModal(false)}
+              >
+                <Text style={styles.modalButtonText}>Não</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+
+  const ConfirmationDeleteItensModal = () => {
+    return (
+      <Modal
+        transparent={true}
+        visible={showConfirmationDeleteItensModal}
+        onRequestClose={() => setShowConfirmationDeleteItensModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={[styles.modalContent, { maxHeight: windowDimensions.height * 0.4 }]}>
+            <Text style={styles.modalConfirmationText}>Tem certeza de que deseja excluir os itens selecionados?</Text>
+            <View style={styles.modalButtonsContainer}>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.confirmButton]}
+                onPress={() => {
+                  setShowConfirmationDeleteItensModal(false);
+                  handleDeleteSelectedItems();
+                }}
+              >
+                <Text style={styles.modalButtonText}>Sim</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.cancelButton]}
+                onPress={() => setShowConfirmationDeleteItensModalModal(false)}
+              >
+                <Text style={styles.modalButtonText}>Não</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -324,6 +461,8 @@ const HomePage = () => {
       <FooterBar/>
       <SelectedItemsModal />
       <FeedbackModal />
+      <ConfirmationModal />
+      <ConfirmationDeleteItensModal />
     </View>
   );
 };
@@ -379,18 +518,61 @@ const styles = StyleSheet.create({
   finishButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
   },
   deleteButton: {
-    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: 'red',
-    padding: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 10,
   },
   deleteButtonText: {
-    color: 'red',
+    color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
+    marginLeft: 5,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    marginRight: 10,
+  },
+  itemText: {
+    fontSize: 16,
+  },
+  selectedItemCart: {
+    backgroundColor: '#f0f0f0',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 5,
+  },
+  selectedItemImage: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    marginRight: 10,
+    borderColor: 'black',
+    borderWidth: 2,
+  },
+  selectedItemText: {
+    fontSize: 16,
+    color: 'black',
   },
   modalContainer: {
     flex: 1,
@@ -423,6 +605,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  modalButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  modalButton: {
+    width: '40%',
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  cancelButton: {
+    backgroundColor: '#E74C3C',
+  },
+  confirmButton: {
+    backgroundColor: '#27AE60',
+  },
+  modalButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -454,7 +658,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   finishGameButton: {
-    marginTop: 10,
+    marginTop: 50,
     marginBottom: -10,
     backgroundColor: 'green',
     padding: 10,
@@ -464,7 +668,7 @@ const styles = StyleSheet.create({
   finishGameButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 15,
   },
   additionalItemsGoodTitle: {
     color: 'green',

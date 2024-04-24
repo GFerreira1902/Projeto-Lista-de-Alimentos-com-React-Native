@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/images/ImgSplash.png",
       "resizeMode": "contain",
-      "backgroundColor": "black"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#fffff"
-      }
+        "foregroundImage": "./assets/images/ImgSplash.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.gferreiraadev.projectAlimento"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/ImgSplash.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6da6994c-27d3-4fb2-9bf3-db6c8e5029d3"
+      }
     }
   }
 }
