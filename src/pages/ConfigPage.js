@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, ScrollView, Modal, Button } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView, Modal, Button} from 'react-native';
 import FooterBar from '../components/FooterBar';
 import { Video } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ConfigPage = () => {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -41,13 +42,25 @@ const ConfigPage = () => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.optionsContainer}>
-          <Text style={styles.optionText} onPress={handleStartVideo}>TUTORIAL</Text>
+          <LinearGradient
+            colors={['#e53216', '#962727', '#e53216']}
+            start={{ x: 0, y:0 }}
+            end={{ x:1, y:1 }}
+            style={styles.linearGradient}
+          >
+            <Text style={styles.optionText} onPress={handleStartVideo}>TUTORIAL</Text>
+          </LinearGradient>  
         </View>
-        <View style={styles.separator}></View>
         <View style={styles.optionsContainer}>
-          <Text style={styles.optionText} onPress={handleToggleCreditsModal}>CREDITOS</Text>
+          <LinearGradient
+            colors={['#e53216', '#962727', '#e53216']}
+            start={{ x: 0, y:0 }}
+            end={{ x:1, y:1 }}
+            style={styles.linearGradient}
+          >
+            <Text style={styles.optionText} onPress={handleToggleCreditsModal}>CREDITOS</Text>
+          </LinearGradient>         
         </View>
-        <View style={styles.separator}></View>
       </ScrollView>
       {showTutorial && (
         <View style={styles.videoContainer}>
@@ -75,24 +88,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingVertical: 20,
-    paddingHorizontal: 20
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10
   },
   optionsContainer: {
     marginBottom: 10,
+    width: '60%',
+    alignItems: 'center',
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  optionContainer: {
-    marginBottom: 10,
-  },
   optionText: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginLeft: 10
+    marginLeft: 10,
+    color: 'white'
+  },
+  linearGradient: {
+    width: '100%',
+    height: '60',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+    borderRadius: 20
   },
   separator: {
     borderBottomWidth: 1,
