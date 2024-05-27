@@ -112,10 +112,9 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     width: '100%',
-    height: '60',
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 20
