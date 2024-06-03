@@ -29,6 +29,11 @@ const InitialPage = () => {
   return (
     <View style={styles.container}>
       <Animated.Image 
+        style={[styles.nameAppStartGame, { transform: [{ scale: imageScale }] }]} 
+        source={require('../../assets/images/nameapp.png')}
+        resizeMode='contain'  
+      />
+      <Animated.Image 
         style={[styles.imgStartGame, { transform: [{ scale: imageScale }] }]} 
         source={require('../../assets/images/playgame.png')}
         resizeMode='contain'  
@@ -55,6 +60,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center',
     backgroundColor: '#fff',
+  },
+  nameAppStartGame: {
+    width: 250,
+    height: 50
   },
   imgStartGame: {
     width: 320,

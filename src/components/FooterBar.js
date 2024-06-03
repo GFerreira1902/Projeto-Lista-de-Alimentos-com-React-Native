@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const FooterBar = ({ cartItemCount }) => {
     const navigation = useNavigation();
@@ -20,7 +21,10 @@ const FooterBar = ({ cartItemCount }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <LinearGradient 
+            style={styles.container} 
+            colors={['#e53216', '#962727', '#e53216']}
+        >
             <TouchableOpacity onPress={handleHomePress}>
                 <MaterialCommunityIcons name="home" size={35} color="white" />
             </TouchableOpacity>          
@@ -40,7 +44,7 @@ const FooterBar = ({ cartItemCount }) => {
             <TouchableOpacity onPress={handleConfigPress}>
                 <Ionicons name="settings" size={30} color="white" /> 
             </TouchableOpacity>
-        </View> 
+        </LinearGradient> 
     ); 
 };
 
@@ -51,9 +55,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: '#CB3636',
       height: 60,
       width: '100%',
+      borderTopLeftRadius: 40
     },
     cartContainer: {
         position: 'relative',

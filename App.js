@@ -16,9 +16,12 @@ const App = () => {
         <Stack.Screen 
           name="InitialPage" 
           component={InitialPage} 
+          // options={{
+          //   header: () => <HeaderBar title=""/>,
+          // }}  
           options={{
-            header: () => <HeaderBar title="KOMIDINHAZ"/>,
-          }}  
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="HomePage"
