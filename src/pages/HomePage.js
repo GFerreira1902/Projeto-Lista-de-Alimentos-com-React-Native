@@ -90,14 +90,6 @@ const HomePage = () => {
     return selectedItems.includes(itemId);
   };
 
-  const handleToggleItemSelectedModal = (itemId) => {
-    setSelectedItemToDelete(itemId);
-  };
-  
-  const isItemSelectedModal = (itemId) => {
-    return selectedItemToDelete === itemId;
-  };
-
   const modalItemList = useMemo(() => {
     return randomizedData.filter(item => selectedItems.includes(item.id));
   }, [randomizedData, selectedItems]);
@@ -196,22 +188,6 @@ const HomePage = () => {
           return [...prevItems, itemId];
         }
       });
-    };
-  
-    const handleLongPress = (itemId) => {
-      // Seleciona o item após o long press e permite a seleção de outros itens com um único clique
-      setSelectedItemsToDelete([itemId]);
-      setShowTrashIcon(true); // Mostra o ícone de lixeira após um long press
-    };
-  
-    const handleToggleItemSelection = (itemId) => {
-      // Adiciona ou remove itens da lista de itens selecionados para exclusão após um clique simples
-      if (selectedItemsToDelete.includes(itemId)) {
-        setSelectedItemsToDelete(prevItems => prevItems.filter(id => id !== itemId));
-      } else {
-        setSelectedItemsToDelete(prevItems => [...prevItems, itemId]);
-        setShowTrashIcon(true); // Mostra o ícone de lixeira quando um item é selecionado
-      }
     };
   
     const handleDeleteSelectedItems = () => {
