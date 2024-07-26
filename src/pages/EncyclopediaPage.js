@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, Dimensions, Modal, TouchableOpacity, Image, TextInput} from 'react-native';
+import * as Speech from 'expo-speech';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FooterBar from '../components/FooterBar';
 import { data } from '../../dados';
@@ -21,9 +22,17 @@ const EncyclopediaPage = () => {
     setSelectedItem(null);
   };
 
+  const audioAlimento = (alimento) => {
+    Speech.speak(alimento, {
+      language: 'pt-BR',
+      pitch: 1.0,
+      rate: 0.75
+    });
+  };
+
   const renderCard = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => openModal(item)}>
+      <TouchableOpacity onPress={() => { openModal(item); audioAlimento(item.alimento); }}>
         <View style={styles.card}>
           <Text style={styles.cardText}>{item.alimento}</Text>
           <Image source={item.path_image} style={styles.image} />
