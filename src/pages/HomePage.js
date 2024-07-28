@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, Modal, useWindowDimensions } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, Modal, useWindowDimensions, Button } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
+import * as Speech from 'expo-speech';
 import FooterBar from '../components/FooterBar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {data} from '../../dados'
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,6 +22,7 @@ const HomePage = () => {
   const [selectedItemToDelete, setSelectedItemToDelete] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showConfirmationDeleteItensModal, setShowConfirmationDeleteItensModal] = useState(false);
+  const [userScore, setUserScore] = useState(0);
 
   useEffect(() => {
     getSavedItems();
@@ -30,6 +32,10 @@ const HomePage = () => {
   useEffect(() => {
     saveItems(selectedItems);
   }, [selectedItems]);
+
+  useEffect(() => {
+    loadUserScore();
+  }, []);
 
   const getSavedItems = async () => {
     try {
@@ -121,6 +127,39 @@ const HomePage = () => {
 
   let message = '';
   let additionalItems = [];
+
+  const audioAlimento = (alimento) => {
+    Speech.speak(alimento, {
+      language: 'pt-BR',
+      pitch: 1.0,
+      rate: 2.0
+    });
+  };
+
+  const loadUserScore = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@userScore')
+      if (value) {
+        setUserScore(parseInt(value, 10));
+      }
+    }catch (e) {
+      console.error(e);
+    }
+  };
+
+  const saveUserScore = async (value) => {
+    try {
+      await AsyncStorage.setItem('@userScore', value.toString());
+    }catch (e) {
+      console.log(e);
+    }
+  };
+
+  const incrementUserScore = () => {
+    const newScore = userScore + 1; // Incrementa a contagem
+    setUserScore(newScore); // Atualiza o estado userScore
+    saveUserScore(newScore); // Salva o novo valor de userScore no AsyncStorage
+  };
 
   if (healthPercentage === 100) {
     message = 'PARABÉNS';
@@ -415,7 +454,7 @@ const HomePage = () => {
         data={randomizedData}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => toggleItemSelection(item.id)}
+            onPress={() => { toggleItemSelection(item.id); incrementUserScore(); }}
           >
             <View style={[styles.card, isItemSelected(item.id) && styles.selectedCard]}>
               <Text style={styles.cardText}>{item.alimento}</Text>
@@ -434,6 +473,9 @@ const HomePage = () => {
           </Text>
         </TouchableOpacity>
       )}
+      <Button title="Incrementar" onPress={incrementUserScore} />
+      <Text style={styles.textTesteScore}>Pontuação do usuário: {userScore}</Text>
+      
       <FooterBar/>
       <SelectedItemsModal />
       <FeedbackModal />
@@ -676,6 +718,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  textTesteScore: {
+    fontSize: 24,
+    marginBottom: 60,
   },
 });
 

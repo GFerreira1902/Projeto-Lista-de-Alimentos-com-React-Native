@@ -26,7 +26,7 @@ const EncyclopediaPage = () => {
     Speech.speak(alimento, {
       language: 'pt-BR',
       pitch: 1.0,
-      rate: 0.75
+      rate: 1.5
     });
   };
 

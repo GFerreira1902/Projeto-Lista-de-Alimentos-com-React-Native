@@ -16,7 +16,7 @@ export const data = [
     {
         id: 3,
         alimento: "Uva",
-        descricao: "Tírutinha muito gostosa. Vem em cachos com varias dela. Possui muitos carboidratos, dando bastante energia pro corpo.",
+        descricao: "Frutinha muito gostosa. Vem em cachos com varias dela. Possui muitos carboidratos, dando bastante energia pro corpo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/uva.png")
     },
