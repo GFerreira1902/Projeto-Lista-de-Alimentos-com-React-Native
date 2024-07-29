@@ -27,15 +27,12 @@ const HomePage = () => {
   useEffect(() => {
     getSavedItems();
     randomizeData();
+    loadUserScore();
   }, []);
 
   useEffect(() => {
     saveItems(selectedItems);
   }, [selectedItems]);
-
-  useEffect(() => {
-    loadUserScore();
-  }, []);
 
   const getSavedItems = async () => {
     try {
@@ -125,9 +122,6 @@ const HomePage = () => {
     return (healthyItems / totalSelected) * 100;
   }, [modalItemList]);
 
-  let message = '';
-  let additionalItems = [];
-
   const audioAlimento = (alimento) => {
     Speech.speak(alimento, {
       language: 'pt-BR',
@@ -138,11 +132,11 @@ const HomePage = () => {
 
   const loadUserScore = async () => {
     try {
-      const value = await AsyncStorage.getItem('@userScore')
+      const value = await AsyncStorage.getItem('@userScore');
       if (value) {
         setUserScore(parseInt(value, 10));
       }
-    }catch (e) {
+    } catch (e) {
       console.error(e);
     }
   };
@@ -155,21 +149,39 @@ const HomePage = () => {
     }
   };
 
-  const incrementUserScore = () => {
-    const newScore = userScore + 1; // Incrementa a contagem
-    setUserScore(newScore); // Atualiza o estado userScore
-    saveUserScore(newScore); // Salva o novo valor de userScore no AsyncStorage
+  const incrementUserScore = (resultGame) => {
+    setUserScore((prevScore) => {
+      let newScore = prevScore;
+  
+      if (resultGame === 'PARABÉNS') {
+        newScore += 5;
+      } else if (resultGame === 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR') {
+        newScore += 3;
+      } else if (resultGame === 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA') {
+        newScore += 1;
+      }
+  
+      saveUserScore(newScore);
+      return newScore;
+    });
   };
 
+  
+  let message = '';
+  let additionalItems = [];
+  
   if (healthPercentage === 100) {
     message = 'PARABÉNS';
+    // incrementUserScore(message);
   } else if (healthPercentage< 100 && healthPercentage >= 75) {
     message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
     additionalItems = getRandomHealthyItems();
+    // incrementUserScore(message);
   } else if (healthPercentage >= 50) {
     message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
     additionalItems = getUnhealthyItems();
-  } else {
+    // incrementUserScore(message);
+  } else if (healthPercentage < 50) {
     message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
     additionalItems = getRandomHealthyItems();
   }
@@ -454,7 +466,7 @@ const HomePage = () => {
         data={randomizedData}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => { toggleItemSelection(item.id); incrementUserScore(); }}
+            onPress={() => { toggleItemSelection(item.id);}}
           >
             <View style={[styles.card, isItemSelected(item.id) && styles.selectedCard]}>
               <Text style={styles.cardText}>{item.alimento}</Text>
@@ -473,8 +485,6 @@ const HomePage = () => {
           </Text>
         </TouchableOpacity>
       )}
-      <Button title="Incrementar" onPress={incrementUserScore} />
-      <Text style={styles.textTesteScore}>Pontuação do usuário: {userScore}</Text>
       
       <FooterBar/>
       <SelectedItemsModal />

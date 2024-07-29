@@ -5,6 +5,7 @@ import InitialPage from "./src/pages/InitialPage";
 import HomePage from "./src/pages/HomePage";
 import EncyclopediaPage from "./src/pages/EncyclopediaPage";
 import ConfigPage from "./src/pages/ConfigPage";
+import UserPage from "./src/pages/UserPage";
 import HeaderBar from "./src/components/HeaderBar";
 
 const Stack = createStackNavigator();
@@ -35,6 +36,13 @@ const App = () => {
           component={EncyclopediaPage}
           options={{
             header: () => <HeaderBar title="ENCICLOPÉDIA DOS ALIMENTOS"/>,
+          }}
+        />
+        <Stack.Screen
+          name="UserPage"
+          component={UserPage}
+          options={{
+            header: () => <HeaderBar title="ÁREA DO JOGADOR"/>,
           }}
         />
         <Stack.Screen
