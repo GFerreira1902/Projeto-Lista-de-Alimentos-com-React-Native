@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import * as Speech from 'expo-speech';
 import FooterBar from '../components/FooterBar';
-import {data} from '../../dados'
+import { data } from '../../dados'
 
 const windowWidth = Dimensions.get('window').width;
 const imgFeedbackGood = require('../../assets/images/feedback/facefeliz.png')
@@ -23,6 +23,7 @@ const HomePage = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showConfirmationDeleteItensModal, setShowConfirmationDeleteItensModal] = useState(false);
   const [userScore, setUserScore] = useState(0);
+  const [scoreUpdated, setScoreUpdated] = useState(false);
 
   useEffect(() => {
     getSavedItems();
@@ -144,7 +145,7 @@ const HomePage = () => {
   const saveUserScore = async (value) => {
     try {
       await AsyncStorage.setItem('@userScore', value.toString());
-    }catch (e) {
+    } catch (e) {
       console.log(e);
     }
   };
@@ -152,7 +153,7 @@ const HomePage = () => {
   const incrementUserScore = (resultGame) => {
     setUserScore((prevScore) => {
       let newScore = prevScore;
-  
+
       if (resultGame === 'PARABÉNS') {
         newScore += 5;
       } else if (resultGame === 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR') {
@@ -160,31 +161,35 @@ const HomePage = () => {
       } else if (resultGame === 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA') {
         newScore += 1;
       }
-  
+
       saveUserScore(newScore);
       return newScore;
     });
   };
 
-  
+
   let message = '';
   let additionalItems = [];
-  
+
   if (healthPercentage === 100) {
     message = 'PARABÉNS';
-    // incrementUserScore(message);
-  } else if (healthPercentage< 100 && healthPercentage >= 75) {
+  } else if (healthPercentage < 100 && healthPercentage >= 75) {
     message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
     additionalItems = getRandomHealthyItems();
-    // incrementUserScore(message);
   } else if (healthPercentage >= 50) {
     message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
     additionalItems = getUnhealthyItems();
-    // incrementUserScore(message);
   } else if (healthPercentage < 50) {
     message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
     additionalItems = getRandomHealthyItems();
   }
+
+  useEffect(() => {
+    if (isSecondModalVisible && !scoreUpdated) {
+      incrementUserScore(message);
+      setScoreUpdated(true);
+    }
+  }, [isSecondModalVisible, scoreUpdated]);
 
   function getRandomHealthyItems() {
     // Obtém os IDs dos itens saudáveis já selecionados
@@ -193,7 +198,7 @@ const HomePage = () => {
         const selectedItem = data.find(item => item.id === itemId);
         return selectedItem && selectedItem.classificacao_saude === 'saudavel';
       });
-  
+
     // Filtra os itens saudáveis que não foram selecionados
     const remainingHealthyItems = data.filter(item => {
       return (
@@ -201,10 +206,10 @@ const HomePage = () => {
         !selectedHealthyItemIds.includes(item.id)
       );
     });
-  
+
     // Obtém os itens saudáveis restantes para completar até 4 itens
     const additionalHealthyItems = remainingHealthyItems.slice(0, 4);
-  
+
     return additionalHealthyItems;
   }
 
@@ -217,16 +222,16 @@ const HomePage = () => {
   const SelectedItemsModal = () => {
     const [selectedItemsToDelete, setSelectedItemsToDelete] = useState([]); // Estado para armazenar os itens selecionados para exclusão
     const [showTrashIcon, setShowTrashIcon] = useState(false); // Estado para controlar a exibição do ícone de lixeira
-  
+
     const handleToggleItemToDelete = (itemId) => {
       // Verifica se o item já está na lista de itens selecionados para exclusão
       const isSelected = selectedItemsToDelete.includes(itemId);
-    
+
       // Se não houver mais itens selecionados, esconde a lixeira
       if (selectedItemsToDelete.length === 0) {
         setShowTrashIcon(false);
       }
-    
+
       // Atualiza a lista de itens selecionados para exclusão
       setSelectedItemsToDelete((prevItems) => {
         if (isSelected) {
@@ -240,19 +245,19 @@ const HomePage = () => {
         }
       });
     };
-  
+
     const handleDeleteSelectedItems = () => {
       // Remove os itens selecionados da lista de itens selecionados
       setSelectedItems(prevItems => prevItems.filter(id => !selectedItemsToDelete.includes(id)));
-    
+
       // Limpa a lista de itens selecionados para exclusão e oculta o ícone da lixeira
       setSelectedItemsToDelete([]);
       setShowTrashIcon(false);
       setIsModalVisible(false); // Fechar a modal após a exclusão dos itens
     };
-  
+
     const selectedItemsCount = selectedItemsToDelete.length; // Número de itens selecionados para exclusão
-  
+
     return (
       <Modal
         transparent={true}
@@ -299,6 +304,7 @@ const HomePage = () => {
   };
 
   const FeedbackModal = () => {
+
     // Função para obter os itens saudáveis
     const getHealthyItems = () => {
       return additionalItems.filter(item => item.classificacao_saude === 'saudavel');
@@ -307,13 +313,14 @@ const HomePage = () => {
     const handlePlayAgain = () => {
       // Limpar a lista selecionada
       setIsModalVisible(false);
+      setScoreUpdated(false);
       setSelectedItems([]);
       // Fechar a modal de feedback
       setIsSecondModalVisible(false);
       navigation.navigate('InitialPage');
 
     };
-  
+
     return (
       <Modal
         transparent={true}
@@ -324,11 +331,12 @@ const HomePage = () => {
           <View style={[styles.feedbackContainer, { maxHeight: windowDimensions.height * 0.8 }]}>
             <Text style={styles.modalTitle}>{message}</Text>
             {healthPercentage === 100 && (
-              <>
-                <View>
-                  <Image source={imgFeedbackGood} />
-                </View>
-              </>
+              <View style={styles.centeredContent}>
+                <Image source={imgFeedbackGood} />
+                <Text style={styles.coinMessage}>
+                  Você Ganhou <Text style={styles.greenText}>+5</Text> Pontos!
+                </Text>
+              </View>
             )}
             {healthPercentage < 100 && healthPercentage >= 75 && (
               <>
@@ -341,12 +349,17 @@ const HomePage = () => {
                       <Text>{item.alimento}</Text>
                     </View>
                   )}
-                  keyExtractor={(item) => (item.id ? item.id.toString() : null)}
+                keyExtractor={(item) => (item.id ? item.id.toString() : null)}
                 />
+                <View style={styles.centeredContent}>
+                  <Text style={styles.coinMessage}>
+                    Você Ganhou <Text style={styles.greenText}>+3</Text> Pontos!
+                  </Text>
+                </View>
               </>
             )}
             {healthPercentage < 75 && healthPercentage >= 50 && (
-              <> 
+              <>
                 <Image source={imgFeedbackModerado} />
                 <Text style={styles.additionalItemsGoodTitle}>Alimentos Recomendados</Text>
                 <FlatList
@@ -368,6 +381,11 @@ const HomePage = () => {
                   )}
                   keyExtractor={(item) => (item.id ? item.id.toString() : null)} // Verifica se item.id é nulo ou indefinido antes de chamar toString()
                 />
+                <View style={styles.centeredContent}>
+                  <Text style={styles.coinMessage}>
+                    Você Ganhou <Text style={styles.greenText}>+1</Text> Ponto!
+                  </Text>
+                </View>
               </>
             )}
             {healthPercentage < 50 && (
@@ -462,11 +480,11 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList 
+      <FlatList
         data={randomizedData}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => { toggleItemSelection(item.id);}}
+            onPress={() => { toggleItemSelection(item.id); }}
           >
             <View style={[styles.card, isItemSelected(item.id) && styles.selectedCard]}>
               <Text style={styles.cardText}>{item.alimento}</Text>
@@ -485,8 +503,8 @@ const HomePage = () => {
           </Text>
         </TouchableOpacity>
       )}
-      
-      <FooterBar/>
+
+      <FooterBar />
       <SelectedItemsModal />
       <FeedbackModal />
       <ConfirmationModal />
@@ -632,6 +650,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  centeredContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  coinMessage: {
+    fontSize: 16,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  greenText: {
+    color: 'darkgreen',
+    fontWeight: 'bold',
   },
   modalButtonsContainer: {
     flexDirection: 'row',
