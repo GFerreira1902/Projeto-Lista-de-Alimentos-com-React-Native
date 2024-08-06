@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity, Image, 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { Audio } from 'expo-av';
 import * as Speech from 'expo-speech';
 import FooterBar from '../components/FooterBar';
 import { data } from '../../dados'
@@ -24,6 +25,7 @@ const HomePage = () => {
   const [showConfirmationDeleteItensModal, setShowConfirmationDeleteItensModal] = useState(false);
   const [userScore, setUserScore] = useState(0);
   const [scoreUpdated, setScoreUpdated] = useState(false);
+  const [sound, setSound] = useState(null);
 
   useEffect(() => {
     getSavedItems();
@@ -34,6 +36,16 @@ const HomePage = () => {
   useEffect(() => {
     saveItems(selectedItems);
   }, [selectedItems]);
+
+  useEffect(() => {
+    return sound ? () => sound.unloadAsync() : undefined;
+  }, [sound]);
+
+  const playSoundFeedback = async (soundFile) => {
+    const { sound } = await Audio.Sound.createAsync(soundFile);
+    setSound(sound);
+    await sound.playAsync();
+  };
 
   const getSavedItems = async () => {
     try {
@@ -171,21 +183,42 @@ const HomePage = () => {
   let message = '';
   let additionalItems = [];
 
-  if (healthPercentage === 100) {
-    message = 'PARABÉNS';
-  } else if (healthPercentage < 100 && healthPercentage >= 75) {
-    message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
-    additionalItems = getRandomHealthyItems();
-  } else if (healthPercentage >= 50) {
-    message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
-    additionalItems = getUnhealthyItems();
-  } else if (healthPercentage < 50) {
-    message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
-    additionalItems = getRandomHealthyItems();
-  }
+  // if (healthPercentage === 100) {
+  //   message = 'PARABÉNS';
+  //   // playSound(require('../../assets/sounds/parabens.mp3'));
+  // } else if (healthPercentage < 100 && healthPercentage >= 75) {
+  //   message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
+  //   additionalItems = getRandomHealthyItems();
+  //   // playSound(require('../../assets/sounds/parabens.mp3'));
+  // } else if (healthPercentage >= 50) {
+  //   message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
+  //   additionalItems = getUnhealthyItems();
+  //   // playSound(require('../../assets/sounds/encorajamento.mp3'));
+  // } else if (healthPercentage < 50) {
+  //   message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
+  //   additionalItems = getRandomHealthyItems();
+  //   // playSound(require('../../assets/sounds/decepcionado.mp3'));
+  // }
 
   useEffect(() => {
     if (isSecondModalVisible && !scoreUpdated) {
+      if (healthPercentage === 100) {
+        message = 'PARABÉNS';
+        playSoundFeedback(require('../../assets/sounds/audiogood.mp3'));
+      } else if (healthPercentage < 100 && healthPercentage >= 75) {
+        message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
+        additionalItems = getRandomHealthyItems();
+        playSoundFeedback(require('../../assets/sounds/audiogood.mp3'));
+      } else if (healthPercentage >= 50) {
+        message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
+        additionalItems = getUnhealthyItems();
+        playSoundFeedback(require('../../assets/sounds/audiohmm.mp3'));
+      } else if (healthPercentage < 50) {
+        message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
+        additionalItems = getRandomHealthyItems();
+        playSoundFeedback(require('../../assets/sounds/audiobad.mp3'));
+      }
+
       incrementUserScore(message);
       setScoreUpdated(true);
     }
