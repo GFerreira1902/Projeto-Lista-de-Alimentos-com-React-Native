@@ -218,7 +218,7 @@ const HomePage = () => {
         additionalItems = getRandomHealthyItems();
         playSoundFeedback(require('../../assets/sounds/audiobad.mp3'));
       }
-
+      
       incrementUserScore(message);
       setScoreUpdated(true);
     }

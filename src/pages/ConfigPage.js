@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, ScrollView, Modal, Button} from 'react-native';
 import FooterBar from '../components/FooterBar';
 import { Video } from 'expo-av';
@@ -8,6 +8,7 @@ const ConfigPage = () => {
   const [showTutorial, setShowTutorial] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
   const video = require('../../assets/images/tutorialgame/teste.mp4');
+  const [termsText, setTermsText] = useState('');
 
   const handleStartVideo = () => {
     setShowTutorial(!showTutorial);
@@ -21,6 +22,30 @@ const ConfigPage = () => {
     setShowCreditsModal(false);
   };
 
+  useEffect(() => {
+    const loadTerms = async () => {
+      try {
+        const termsData = require('../../credito.json');
+        setTermsText(termsData.terms);
+      } catch (error) {
+        console.error('Erro ao carregar os termos:', error);
+      }
+    };
+
+    loadTerms();
+  }, []);
+
+  const renderTextWithStyle = (text) => {
+    const lines = text.split('\n').map((line, index) => {
+      if (line.startsWith('Sobre') || line.startsWith('Aviso') || line.startsWith('Prazo') || line.startsWith('Compromisso') || line.startsWith('Desativação')) {
+        return <Text key={index} style={styles.titleTerms}>{line.trim()}</Text>;
+      }
+      return <Text key={index} style={styles.textTerms}>{line.trim()}</Text>;
+    });
+
+    return lines;
+  };
+
   const renderCreditsModal = () => {
     return (
       <Modal visible={showCreditsModal} animationType="slide" transparent>
@@ -30,8 +55,10 @@ const ConfigPage = () => {
           onPress={handleModalBackgroundPress}
         >
           <View style={styles.modalContainer}>
-            <Text style={styles.modalText}>Texto Gerador de Lero Lero</Text>
-            <Button title="Fechar" onPress={handleToggleCreditsModal} />
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+              {renderTextWithStyle(termsText)}
+              <Button title="Fechar" onPress={handleToggleCreditsModal} />
+            </ScrollView>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -147,11 +174,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
-  modalText: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
   footerConfig: {
     position: 'absolute',
     bottom: 20,
@@ -162,6 +184,29 @@ const styles = StyleSheet.create({
   footerConfigText: {
     fontSize: 16,
     color: 'grey'
+  },
+  textTerms: {
+    fontSize: 16,
+    color: '#333',
+    lineHeight: 24,
+    marginBottom: 10,
+  },
+  titleTerms: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  scrollContainer: {
+    paddingVertical: 10,
+  },
+  modalContainer: {
+    width: '80%',
+    maxHeight: '80%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
   },
 });
 

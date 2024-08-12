@@ -36,4 +36,5 @@ yarn-error.*
 
 # Ignore assets folder
 assets/
+credito.json
 
