@@ -26,6 +26,9 @@ const HomePage = () => {
   const [userScore, setUserScore] = useState(0);
   const [scoreUpdated, setScoreUpdated] = useState(false);
   const [sound, setSound] = useState(null);
+  const [message, setMessage] = useState('');
+  const [additionalItems, setAdditionalItems] = useState([]);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
     getSavedItems();
@@ -42,9 +45,24 @@ const HomePage = () => {
   }, [sound]);
 
   const playSoundFeedback = async (soundFile) => {
-    const { sound } = await Audio.Sound.createAsync(soundFile);
-    setSound(sound);
-    await sound.playAsync();
+    try {
+      const { sound } = await Audio.Sound.createAsync(soundFile);
+      await sound.setRateAsync(1.7, shouldCorrectPitch = true);
+      await sound.playAsync();
+
+      // Aguardar o término do som
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          // Mostrar o botão após o som terminar
+          setIsButtonVisible(true);
+          sound.unloadAsync(); // Descarregar o som após a reprodução
+        }
+      });
+    } catch (error) {
+      console.error('Error playing sound', error);
+      // Mostrar o botão em caso de erro
+      setIsButtonVisible(true);
+    }
   };
 
   const getSavedItems = async () => {
@@ -179,50 +197,36 @@ const HomePage = () => {
     });
   };
 
-
-  let message = '';
-  let additionalItems = [];
-
-  // if (healthPercentage === 100) {
-  //   message = 'PARABÉNS';
-  //   // playSound(require('../../assets/sounds/parabens.mp3'));
-  // } else if (healthPercentage < 100 && healthPercentage >= 75) {
-  //   message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
-  //   additionalItems = getRandomHealthyItems();
-  //   // playSound(require('../../assets/sounds/parabens.mp3'));
-  // } else if (healthPercentage >= 50) {
-  //   message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
-  //   additionalItems = getUnhealthyItems();
-  //   // playSound(require('../../assets/sounds/encorajamento.mp3'));
-  // } else if (healthPercentage < 50) {
-  //   message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
-  //   additionalItems = getRandomHealthyItems();
-  //   // playSound(require('../../assets/sounds/decepcionado.mp3'));
-  // }
-
   useEffect(() => {
     if (isSecondModalVisible && !scoreUpdated) {
+      let newMessage = '';
+      let newAdditionalItems = [];
+
       if (healthPercentage === 100) {
-        message = 'PARABÉNS';
-        playSoundFeedback(require('../../assets/sounds/audiogood.mp3'));
+        newMessage = 'PARABÉNS';
+        playSoundFeedback(require('../../assets/sounds/goodfeedback.mp3'));
       } else if (healthPercentage < 100 && healthPercentage >= 75) {
-        message = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
-        additionalItems = getRandomHealthyItems();
-        playSoundFeedback(require('../../assets/sounds/audiogood.mp3'));
+        newMessage = 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR';
+        newAdditionalItems = getRandomHealthyItems();
+        playSoundFeedback(require('../../assets/sounds/goodfeedback.mp3'));
       } else if (healthPercentage >= 50) {
-        message = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
-        additionalItems = getUnhealthyItems();
-        playSoundFeedback(require('../../assets/sounds/audiohmm.mp3'));
+        newMessage = 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA';
+        newAdditionalItems = getUnhealthyItems();
+        playSoundFeedback(require('../../assets/sounds/mediumfeedback.mp3'));
       } else if (healthPercentage < 50) {
-        message = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
-        additionalItems = getRandomHealthyItems();
-        playSoundFeedback(require('../../assets/sounds/audiobad.mp3'));
+        newMessage = 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS';
+        newAdditionalItems = getRandomHealthyItems();
+        playSoundFeedback(require('../../assets/sounds/badfeedback.mp3'));
       }
-      
-      incrementUserScore(message);
+
+      setMessage(newMessage);
+      setAdditionalItems(newAdditionalItems);
+
+      incrementUserScore(newMessage);
       setScoreUpdated(true);
+      setIsButtonVisible(false);
     }
-  }, [isSecondModalVisible, scoreUpdated]);
+  }, [isSecondModalVisible, scoreUpdated, healthPercentage]);
 
   function getRandomHealthyItems() {
     // Obtém os IDs dos itens saudáveis já selecionados
@@ -382,7 +386,7 @@ const HomePage = () => {
                       <Text>{item.alimento}</Text>
                     </View>
                   )}
-                keyExtractor={(item) => (item.id ? item.id.toString() : null)}
+                  keyExtractor={(item) => (item.id ? item.id.toString() : null)}
                 />
                 <View style={styles.centeredContent}>
                   <Text style={styles.coinMessage}>
@@ -436,9 +440,11 @@ const HomePage = () => {
                 />
               </>
             )}
-            <TouchableOpacity style={styles.playAgainButton} onPress={handlePlayAgain}>
-              <Text style={styles.playAgainButtonText}>Jogar Novamente</Text>
-            </TouchableOpacity>
+            {isButtonVisible && ( // Mostrar o botão somente se `isButtonVisible` for verdadeiro
+              <TouchableOpacity style={styles.playAgainButton} onPress={handlePlayAgain}>
+                <Text style={styles.playAgainButtonText}>Jogar Novamente</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </Modal>

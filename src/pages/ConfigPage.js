@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, ScrollView, Modal, Button} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView, Modal, Button } from 'react-native';
 import FooterBar from '../components/FooterBar';
 import { Video } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,10 +16,6 @@ const ConfigPage = () => {
 
   const handleToggleCreditsModal = () => {
     setShowCreditsModal(!showCreditsModal);
-  };
-
-  const handleModalBackgroundPress = () => {
-    setShowCreditsModal(false);
   };
 
   useEffect(() => {
@@ -49,21 +45,20 @@ const ConfigPage = () => {
   const renderCreditsModal = () => {
     return (
       <Modal visible={showCreditsModal} animationType="slide" transparent>
-        <TouchableOpacity
-          style={styles.modalBackground}
-          activeOpacity={1}
-          onPress={handleModalBackgroundPress}
-        >
+        <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
               {renderTextWithStyle(termsText)}
-              <Button title="Fechar" onPress={handleToggleCreditsModal} />
             </ScrollView>
+            <TouchableOpacity style={styles.closeButton} onPress={handleToggleCreditsModal}>
+              <Text style={styles.closeButtonText}>Fechar</Text>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     );
   };
+
 
   return (
     <View style={styles.container}>
@@ -71,22 +66,22 @@ const ConfigPage = () => {
         <View style={styles.optionsContainer}>
           <LinearGradient
             colors={['#e53216', '#962727', '#e53216']}
-            start={{ x: 0, y:0 }}
-            end={{ x:1, y:1 }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={styles.linearGradient}
           >
             <Text style={styles.optionText} onPress={handleStartVideo}>TUTORIAL</Text>
-          </LinearGradient>  
+          </LinearGradient>
         </View>
         <View style={styles.optionsContainer}>
           <LinearGradient
             colors={['#e53216', '#962727', '#e53216']}
-            start={{ x: 0, y:0 }}
-            end={{ x:1, y:1 }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={styles.linearGradient}
           >
             <Text style={styles.optionText} onPress={handleToggleCreditsModal}>CREDITOS</Text>
-          </LinearGradient>         
+          </LinearGradient>
         </View>
       </ScrollView>
       {showTutorial && (
@@ -104,7 +99,7 @@ const ConfigPage = () => {
       <View style={styles.footerConfig}>
         <Text style={styles.footerConfigText}>© KOMIDINHAZ</Text>
       </View>
-      <FooterBar/>
+      <FooterBar />
     </View>
   );
 };
@@ -167,16 +162,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  modalContainer: {
-    width: '80%',
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
   footerConfig: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 65,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -207,6 +195,18 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
+  },
+  closeButton: {
+    backgroundColor: '#ff6347',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  closeButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
