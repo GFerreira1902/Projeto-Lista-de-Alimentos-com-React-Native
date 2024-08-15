@@ -116,8 +116,19 @@ const HomePage = () => {
       }
     });
 
-    const flattenedData = randomizedItems.saudavel.concat(randomizedItems.moderado, randomizedItems.nao_saudavel);
-    setRandomizedData(flattenedData);
+    const flattenedData = randomizedItems.saudavel.concat(randomizedItems.nao_saudavel, randomizedItems.moderado);
+    
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Embaralha o array final
+    const shuffledFlattenedData = shuffleArray(flattenedData);
+    setRandomizedData(shuffledFlattenedData);
   };
 
   const isItemSelected = (itemId) => {

@@ -45,7 +45,7 @@ export const data = [
         id: 7,
         alimento: "Kiwi",
         descricao: "apesar de um pouquinho azedo, é uma fruta muito boa por conter muita vitamina C, além de também ajudar no bom funcionamento do intestino.",
-        classificacao_saude: "moderado",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/kiwi.png")
     },
     {
@@ -59,7 +59,7 @@ export const data = [
         id: 9,
         alimento: "Cereja",
         descricao: "pequena e gostosa, essa fruta é bem famosa. Além de ajudar na digestão, é rica em potássio.",
-        classificacao_saude: "moderado",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/cereja.png")
     },
     {
