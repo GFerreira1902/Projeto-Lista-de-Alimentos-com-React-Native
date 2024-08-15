@@ -278,5 +278,111 @@ export const data = [
         descricao: "outra carne muito gostosa. É rica em proteínas e em cálcio também.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/peixe.png")
+    },
+    {
+        id: 41,
+        alimento: "Pastel frito",
+        descricao: "massa frita no óleo, onde se coloca recheio de sabores variados. É muito gostoso, mas também perigoso se comer demais por causa da grande quantidade de óleo usado.",
+        classificacao_saude: "nao_saudavel",
+        path_image: require("./assets/images/alimentos/pastel.png")
+    },
+    {
+        id: 42,
+        alimento: "Hortelã",
+        descricao: "uma planta refrescante usada em chás ou sucos. Possui bastante potássio e também cálcio. Ajuda na digestão, além de aliviar náuseas e gases.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/hortela.png")
+    },
+    {
+        id: 43,
+        alimento: "Cebola",
+        descricao: "um bulbo de uma planta, e é usada em diversas receitas, como mistura ou até mesmo como tempero. É rica em fibras, sendo ótima para a digestão, além de antioxidantes, como a vitamina C.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/cebola.png")
+    },
+    {
+        id: 44,
+        alimento: "Berinjela",
+        descricao: "um legume muito nutritivo. Possui vitamina A, B e C, e ajuda no combate ao colesterol ruim do corpo.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/berinjela.png")
+    },
+    {
+        id: 45,
+        alimento: "Ovo",
+        descricao: "vem da galinha, e de outras aves. É muito nutritivo, e contém uma boa quantidade de proteínas, ótimo para quem quer ficar forte. Pode ser feito cozido ou frito (cuidado com a quantidade de óleo), além de ser usado em diversas receitas.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/ovo.png")
+    },
+    {
+        id: 46,
+        alimento: "Pipoca",
+        descricao: "é feita a partir de um milho especial, que ao ser aquecido, estoura e vira a pipoca. É bem saudável, contendo muitas fibras e vitamina B3, que são boas no combate ao colesterol.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/pipoca.png")
+    },
+    {
+        id: 47,
+        alimento: "Peixe enlatado",
+        descricao: "é o peixe normal e saudável que conhecemos, rico em proteínas e vitaminas. A diferença aqui é que ele vem conservado em latas, permitindo que ele dure mais tempo devido aos conservantes. É só não consumir em excesso.",
+        classificacao_saude: "moderado",
+        path_image: require("./assets/images/alimentos/peixeenlatado.png")
+    },
+    {
+        id: 48,
+        alimento: "Pepino",
+        descricao: "vegetal muito usado em saladas. Possui baixas calorias, além de vitaminas A, C e do complexo B, além de bastante potássio. Ajuda na saciedade e na hidratação, pois possui muita água.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/pepino.png")
+    },
+    {
+        id: 49,
+        alimento: "Água mineral",
+        descricao: "essencial para a vida: sem água nós não sobrevivemos. Ela ajuda no funcionamento do corpo, como no transporte de nutrientes e na manutenção da temperatura corporal.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/aguamineral.png")
+    },
+    {
+        id: 50,
+        alimento: "Salsicha",
+        descricao: "um enchido, ou seja, um acumulado de várias carnes. É usada em diversas receitas, principalmente no cachorro-quente. Possui muito sódio e colesterol, sendo um alimento não indicado de ser consumido em excesso.",
+        classificacao_saude: "nao_saudavel",
+        path_image: require("./assets/images/alimentos/salsicha.png")
+    },
+    {
+        id: 51,
+        alimento: "Bolo",
+        descricao: "gostoso e amado por todos. O bolo utiliza trigo ou fubá e ovos na sua receita básica, além de outros tipos de ingredientes, depende do sabor que você quer. Pode ser saudável ou não, depende de como é feito.",
+        classificacao_saude: "moderado",
+        path_image: require("./assets/images/alimentos/bolo.png")
+    },
+    {
+        id: 52,
+        alimento: "Amendoim",
+        descricao: "uma leguminosa muito gostosa. É rico em fibras e ótimo para os músculos, pois contém potássio e magnésio. Possui muitas calorias, então cuidado com o excesso no consumo.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/amendoim.png")
+    },
+    {
+        id: 53,
+        alimento: "Pêssego",
+        descricao: "fruta doce e bem gostosa. É rica em fibras, sendo ótima para a digestão e para o bom funcionamento do intestino. Possui também vitamina A, C e D, além de ter baixas calorias.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/pessego.png")
+    },
+    {
+        id: 54,
+        alimento: "Ketchup",
+        descricao: "molho muito gostoso à base de tomate, sendo usado em diversas receitas, como na pizza e cachorro-quente. Possui muitos conservantes, além de bastante sódio, portanto não é bom consumir em excesso.",
+        classificacao_saude: "nao_saudavel",
+        path_image: require("./assets/images/alimentos/ketchup.png")
+    },
+    {
+        id: 55,
+        alimento: "Abacate",
+        descricao: "fruta muito usada e apreciada. Possui muito potássio, que é bom para os músculos, além de vitamina A, que é boa para a visão. A gordura do abacate também é ótima para o nosso corpo.",
+        classificacao_saude: "saudavel",
+        path_image: require("./assets/images/alimentos/abacate.png")
     }
+    
 ];

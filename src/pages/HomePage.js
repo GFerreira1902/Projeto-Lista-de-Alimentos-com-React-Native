@@ -431,7 +431,7 @@ const HomePage = () => {
                 />
                 <View style={styles.centeredContent}>
                   <Text style={styles.coinMessage}>
-                    Você Ganhou <Text style={styles.greenText}>+1</Text> Ponto!
+                    Você Ganhou <Text style={styles.greenText}>+2</Text> Ponto!
                   </Text>
                 </View>
               </>
@@ -449,6 +449,11 @@ const HomePage = () => {
                   )}
                   keyExtractor={(item) => item.id.toString()}
                 />
+                <View style={styles.centeredContent}>
+                  <Text style={styles.coinMessage}>
+                    Você Ganhou <Text style={styles.greenText}>+1</Text> Ponto!
+                  </Text>
+                </View>
               </>
             )}
             {isButtonVisible && ( // Mostrar o botão somente se `isButtonVisible` for verdadeiro
