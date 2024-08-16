@@ -2,252 +2,252 @@ export const data = [
     {
         id: 1,
         alimento: "Banana",
-        descricao: "fruta muito saborosa e saudável. E rica em potássio, que deixa os músculos e ossos fortes.",
+        descricao: "Fruta muito saborosa e saudável, rica em potássio, que fortalece os músculos e ossos.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/banana.png")
     },
     {
         id: 2,
         alimento: "Laranja",
-        descricao: "fruta muito famosa e gostosa. É rica em vitamina C, fortalecendo o sistema imunológico, dando mais resistência contra as doenças.",
+        descricao: "Fruta muito famosa e gostosa. É rica em vitamina C, fortalecendo o sistema imunológico, dando mais resistência contra doenças.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/laranja.png")
     },
     {
         id: 3,
         alimento: "Uva",
-        descricao: "Frutinha muito gostosa. Vem em cachos com varias dela. Possui muitos carboidratos, dando bastante energia pro corpo.",
+        descricao: "Frutinha muito gostosa que vem em cachos. Possui muitos carboidratos, dando bastante energia para o corpo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/uva.png")
     },
     {
         id: 4,
         alimento: "Mamão",
-        descricao: "fruta doce e muito gostosa. É muito boa para melhorar a digestão e combater a prisão de ventre.",
+        descricao: "Boa pra digestao e prisao de ventre, além de possuir vitamina A, K e potássio.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/mamao.png")
     },
     {
         id: 5,
         alimento: "Melancia",
-        descricao: "grande e muito gostosa, a melancia é excelente para a hidratação, pois cerca de 92% de sua composição é liquida. Também é rica em vitamina C.",
+        descricao: "Grande e muito gostosa, a melancia é excelente para a hidratação, pois cerca de 92% de sua composição é líquida. Também é rica em vitamina C.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/melancia.png")
     },
     {
         id: 6,
         alimento: "Limão",
-        descricao: "apesar de azedo, é uma fruta excelente, sendo antioxidante e rico em vitamina C. Também é muito usado como tempero.",
+        descricao: "Apesar de azedo, é uma fruta excelente, sendo antioxidante e rica em vitamina C. Também é muito usada como tempero.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/limao.png")
     },
     {
         id: 7,
         alimento: "Kiwi",
-        descricao: "apesar de um pouquinho azedo, é uma fruta muito boa por conter muita vitamina C, além de também ajudar no bom funcionamento do intestino.",
+        descricao: "Apesar de um pouquinho azedo, é uma fruta muito boa por conter muita vitamina C, além de ajudar no bom funcionamento do intestino.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/kiwi.png")
     },
     {
         id: 8,
         alimento: "Morango",
-        descricao: "muito gostoso e uma das frutas mais famosas e gostosas. O morango possui muita vitamina C e potássio.",
+        descricao: "Fruta muito gostosa e uma das mais famosas. O morango possui muita vitamina C e potássio.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/morango.png")
     },
     {
         id: 9,
         alimento: "Cereja",
-        descricao: "pequena e gostosa, essa fruta é bem famosa. Além de ajudar na digestão, é rica em potássio.",
+        descricao: "Pequena e gostosa, essa fruta é bem famosa. Além de ajudar na digestão, é rica em potássio.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/cereja.png")
     },
     {
         id: 10,
         alimento: "Maracujá",
-        descricao: "fruta muito famosa, rica em vitamina A e B, além de possuir um efeito calmante natural.",
+        descricao: "Fruta muito famosa, rica em vitaminas A e B, além de possuir um efeito calmante natural.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/maracuja.png")
     },
     {
         id: 11,
         alimento: "Manga",
-        descricao: "muito gostosa e amada, a manga possui vitaminas A e B, e também ajuda no funcionamento do intestino.",
+        descricao: "Muito gostosa e amada, a manga possui vitaminas A e B, e também ajuda no funcionamento do intestino.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/manga.png")
     },
     {
         id: 12,
         alimento: "Maçã",
-        descricao: "no ranking da fama, talvez essa fruta seja a numero 1. Além de gostosa, possui muito potássio e ajuda no bom funcionamento do Intestino.",
+        descricao: "No ranking da fama, talvez essa fruta seja a número 1. Além de gostosa, possui muito potássio e ajuda no bom funcionamento do intestino.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/maca.png")
     },
     {
         id: 13,
         alimento: "Salgadinho",
-        descricao: "alimentos industrializados feitos a partir de vários alimentos. Possuem alto teor calórico, além de muito sódio e oleo.",
+        descricao: "Alimentos industrializados feitos a partir de vários ingredientes. Possuem alto teor calórico, além de muito sódio e óleo.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/salgadinho.png")
     },
     {
         id: 14,
         alimento: "Pizza",
-        descricao: "muito gostosa e amada por todos. É uma massa feita com farinha de trigo e que leva vários ingredientes, como queijo e molho de tomate.Possui alto teor calórico.",
+        descricao: "Muito gostosa e amada por todos. É uma massa feita com farinha de trigo e leva vários ingredientes, como queijo e molho de tomate. Possui alto teor calórico.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/pizza.png")
     },
     {
         id: 15,
         alimento: "Batata frita",
-        descricao: "muito gostosa e todo mundo ama. É a batata que conhecemos, porém frita no Oleo, com alto teor calórico.",
+        descricao: "Muito gostosa e todo mundo ama. É a batata que conhecemos, porém frita no óleo, com alto teor calórico.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/batata frita.png")
+        path_image: require("./assets/images/alimentos/batatafrita.png")
     },
     {
         id: 16,
         alimento: "Refrigerante",
-        descricao: "bebida com gás e muito apreciada. É feita industrialmente e possui vários sabores. Contém altos indices de açúcar adicionado.",
+        descricao: "Bebida com gás e muito apreciada. É feita industrialmente e possui vários sabores. Contém altos índices de açúcar adicionado.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/refrigerante.png")
     },
     {
         id: 17,
         alimento: "Biscoito recheado",
-        descricao: "Biscoitos com um recheio no meio, muito gostoso e amado por crianças. Possui muita gordura saturada, além do excesso de açúcar.",
+        descricao: "Biscoitos com recheio no meio, muito gostoso e amado por crianças. Possui muita gordura saturada, além do excesso de açúcar.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/biscoito recheado.png")
+        path_image: require("./assets/images/alimentos/biscoitorecheado.png")
     },
     {
         id: 18,
         alimento: "Suco de caixinha",
-        descricao: "sucos com muitos conservantes para manterem-se bebíveis por muito tempo. Além disso, possuem muito açúcar adi",
+        descricao: "Sucos com muitos conservantes para manterem-se bebíveis por muito tempo. Além disso, possuem muito açúcar adicionado.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/sucodecaixinha.png")
     },
     {
         id: 19,
         alimento: "Miojo",
-        descricao: "macarrão instantâneo, muito usado por ser prático. Possui muito sódio e gordura, além da alto teor calórico.",
+        descricao: "Macarrão instantâneo, muito usado por ser prático. Possui muito sódio e gordura, além do alto teor calórico.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/miojo.png")
     },
     {
         id: 20,
         alimento: "Cachorro-quente",
-        descricao: "alimento que coloca-se salsicha dentro do pão, além de outros ingredientes, e é muito gostoso. Possui alto teor calórico e bastante sódio.",
+        descricao: "Alimento que se coloca salsicha dentro do pão, além de outros ingredientes. É muito gostoso, porém possui alto teor calórico e muito sódio.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/cachorroquente.png")
     },
     {
         id: 21,
         alimento: "Sorvete",
-        descricao: "doce gelado feito a partir do leite, com diversos sabores. Os sorvetes processados possuem muita gordura e açúcares.",
+        descricao: "Doce gelado feito a partir do leite, com diversos sabores. Os sorvetes processados possuem muita gordura e açúcares.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/sorvete.png")
     },
     {
         id: 22,
-        alimento: "Achocolatado",
-        descricao: "mistura de leite com pó de cacau. Possui conservantes e muitos açúcares.",
+        alimento: "Nescau",
+        descricao: "Mistura de leite com pó de cacau muito gostoso. Possui conservantes e muito açúcar.",
         classificacao_saude: "nao_saudavel",
-        path_image: require("./assets/images/alimentos/achocolatado.png")
+        path_image: require("./assets/images/alimentos/nescau.png")
     },
     {
         id: 23,
         alimento: "Pirulito",
-        descricao: "doce muito apreciado pelas crianças, e possui várias formas e sabores. Apresenta muito açúcar.",
+        descricao: "Doce muito apreciado pelas crianças, com várias formas e sabores. Apresenta muito açúcar.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/pirulito.png")
     },
     {
         id: 24,
         alimento: "Coxinha",
-        descricao: "um gostoso salgado feito com massa de farinha de trigo, possuindo recheio, sendo o mais famoso o frango. É frito e possui alto teor calórico.",
+        descricao: "Salgado feito com massa de farinha de trigo, geralmente com recheio de frango. É frito e possui alto teor calórico.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/coxinha.png")
     },
     {
         id: 25,
         alimento: "Cenoura",
-        descricao: "é uma raiz muito boa para a saúde, muito usada em saladas. Possui muita vitamina A, sendo boa para a visão.",
+        descricao: "Raiz muito boa para a saúde, muito usada em saladas. Possui muita vitamina A, sendo boa para a visão.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/cenoura.png")
     },
     {
         id: 26,
         alimento: "Alface",
-        descricao: "é uma verdura muito famosa e talvez a mais conhecida. É usada nas saladas, possui ação antioxidante e é rica em fibras, ajudando no bom funcionamento do intestino. Possui baixo teor calórico.",
+        descricao: "Verdura muito famosa e talvez a mais conhecida. Usada nas saladas, possui ação antioxidante e é rica em fibras, ajudando no bom funcionamento do intestino. Possui baixo teor calórico.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/alface.png")
     },
     {
         id: 27,
         alimento: "Tomate",
-        descricao: "é um fruto muito usado nas saladas. Além de gostoso, possui muita vitamina C e potássio.",
+        descricao: "Fruto muito usado nas saladas. Além de gostoso, possui muita vitamina C e potássio.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/tomate.png")
     },
     {
         id: 28,
         alimento: "Batata",
-        descricao: "um vegetal muito gostoso e usado em várias receitas. É rica em carboidratos e possui muita vitamina C.",
-        classificacao_saude: "moderado",
+        descricao: "Vegetal muito gostoso e usado em várias receitas. É rica em carboidratos e possui muita vitamina C.",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/batata.png")
     },
     {
         id: 29,
         alimento: "Feijão",
-        descricao: "semente muito gostosa e apreciada, usada em vários pratos. Possui muito ferro, que ajuda o sistema imunológico e permite o bom funcionamento das células, evitando anemia.",
+        descricao: "Semente muito gostosa e apreciada, usada em vários pratos. Possui muito ferro, que ajuda o sistema imunológico e permite o bom funcionamento das células, evitando anemia.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/feijao.png")
     },
     {
         id: 30,
         alimento: "Arroz",
-        descricao: "muito famoso e utilizado. O arroz é uma planta rica em carboidratos, sendo o principal alimento usado para obtê-los.",
+        descricao: "Muito famoso e utilizado. O arroz é uma planta rica em carboidratos, sendo o principal alimento usado para obtê-los.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/arroz.png")
     },
     {
         id: 31,
         alimento: "Milho",
-        descricao: "cereal muito gostoso. Possui bastante vitamina A, e pode ser usado em vários pratos.",
-        classificacao_saude: "moderado",
+        descricao: "Cereal muito gostoso. Possui bastante vitamina A, e pode ser usado em vários pratos.",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/milho.png")
     },
     {
         id: 32,
         alimento: "Beterraba",
-        descricao: "uma raiz muito gostosa. É rica em ferro e vitamina C.",
+        descricao: "Raiz muito gostosa. É rica em ferro e vitamina C.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/beterraba.png")
     },
     {
         id: 33,
         alimento: "Abóbora",
-        descricao: "muito gostoso, esse fruto é bem apreciado não só pelo sabor. A abóbora possui muita vitamina A e C.",
+        descricao: "Muito gostosa, a abóbora é bem apreciada não só pelo sabor. Ela possui muita vitamina A e C.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/abobora.png")
     },
     {
         id: 34,
         alimento: "Macarrão",
-        descricao: "massa muito famosa e gostosa. Possui bastante potássio e carboidratos.",
+        descricao: "Massa muito famosa e gostosa. Possui bastante potássio e carboidratos.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/macarrao.png")
     },
     {
         id: 35,
         alimento: "Mandioca",
-        descricao: "uma raiz muito gostosa. Possui muitos carboidratos, além de ter vitamina C.",
-        classificacao_saude: "moderado",
+        descricao: "Raiz muito gostosa. Possui muitos carboidratos, além de vitamina C.",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/mandioca.png")
     },
     {
         id: 36,
         alimento: "Queijo",
-        descricao: "Alimento muito gostoso feito do leite. Possui muitas proteínas e cálcio que é bom para os ossos, além de ajudar no bom funcionamento do intestino.",
+        descricao: "Alimento muito gostoso feito de leite. Possui muitas proteínas e cálcio, que são bons para os ossos, além de ajudar no bom funcionamento do intestino.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/queijo.png")
     },
@@ -261,128 +261,127 @@ export const data = [
     {
         id: 38,
         alimento: "Pão de queijo",
-        descricao: "pãozinho muito gostoso feito de polvilho e queijo. Possui carboidratos e vitaminas.",
+        descricao: "Pãozinho muito gostoso feito de polvilho e queijo. Possui carboidratos e vitaminas.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/paodequeijo.png")
     },
     {
         id: 39,
         alimento: "Frango",
-        descricao: "é uma carne muito gostosa e apreciada. O frango tem muitas proteínas e vitaminas.",
-        classificacao_saude: "moderado",
+        descricao: "Carne muito gostosa e apreciada. O frango tem muitas proteínas e vitaminas.",
+        classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/frango.png")
     },
     {
         id: 40,
         alimento: "Peixe",
-        descricao: "outra carne muito gostosa. É rica em proteínas e em cálcio também.",
+        descricao: "Outra carne muito gostosa. É rica em proteínas e cálcio.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/peixe.png")
     },
     {
         id: 41,
         alimento: "Pastel frito",
-        descricao: "massa frita no óleo, onde se coloca recheio de sabores variados. É muito gostoso, mas também perigoso se comer demais por causa da grande quantidade de óleo usado.",
+        descricao: "Massa frita no óleo, onde se coloca recheio de sabores variados. É muito gostoso, mas perigoso se consumido em excesso devido à grande quantidade de óleo usado.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/pastel.png")
     },
     {
         id: 42,
         alimento: "Hortelã",
-        descricao: "uma planta refrescante usada em chás ou sucos. Possui bastante potássio e também cálcio. Ajuda na digestão, além de aliviar náuseas e gases.",
+        descricao: "Planta refrescante usada em chás ou sucos. Possui bastante potássio e cálcio, ajuda na digestão, além de aliviar náuseas e gases.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/hortela.png")
     },
     {
         id: 43,
         alimento: "Cebola",
-        descricao: "um bulbo de uma planta, e é usada em diversas receitas, como mistura ou até mesmo como tempero. É rica em fibras, sendo ótima para a digestão, além de antioxidantes, como a vitamina C.",
+        descricao: "Bulbo de uma planta, usada em diversas receitas como mistura ou até mesmo como tempero. É rica em fibras, sendo ótima para a digestão, além de antioxidantes, como a vitamina C.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/cebola.png")
     },
     {
         id: 44,
         alimento: "Berinjela",
-        descricao: "um legume muito nutritivo. Possui vitamina A, B e C, e ajuda no combate ao colesterol ruim do corpo.",
+        descricao: "Legume muito nutritivo. Possui vitaminas A, B e C, e ajuda no combate ao colesterol ruim do corpo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/berinjela.png")
     },
     {
         id: 45,
         alimento: "Ovo",
-        descricao: "vem da galinha, e de outras aves. É muito nutritivo, e contém uma boa quantidade de proteínas, ótimo para quem quer ficar forte. Pode ser feito cozido ou frito (cuidado com a quantidade de óleo), além de ser usado em diversas receitas.",
+        descricao: "Alimento proveniente da galinha, e de outras aves. É muito nutritivo, contendo uma boa quantidade de proteínas, ótimo para quem quer ficar forte. Pode ser feito cozido ou frito (cuidado com a quantidade de óleo), além de ser usado em diversas receitas.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/ovo.png")
     },
     {
         id: 46,
         alimento: "Pipoca",
-        descricao: "é feita a partir de um milho especial, que ao ser aquecido, estoura e vira a pipoca. É bem saudável, contendo muitas fibras e vitamina B3, que são boas no combate ao colesterol.",
+        descricao: "Feita a partir de um milho especial, que ao ser aquecido, estoura e vira pipoca. É bem saudável, contendo muitas fibras e vitamina B3, boas no combate ao colesterol.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/pipoca.png")
     },
     {
         id: 47,
         alimento: "Peixe enlatado",
-        descricao: "é o peixe normal e saudável que conhecemos, rico em proteínas e vitaminas. A diferença aqui é que ele vem conservado em latas, permitindo que ele dure mais tempo devido aos conservantes. É só não consumir em excesso.",
+        descricao: "Peixe normal e saudável que conhecemos, rico em proteínas e vitaminas. A diferença é que ele vem conservado em latas, permitindo que dure mais tempo devido aos conservantes. Deve ser consumido com moderação.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/peixeenlatado.png")
     },
     {
         id: 48,
         alimento: "Pepino",
-        descricao: "vegetal muito usado em saladas. Possui baixas calorias, além de vitaminas A, C e do complexo B, além de bastante potássio. Ajuda na saciedade e na hidratação, pois possui muita água.",
+        descricao: "Vegetal muito usado em saladas. Possui baixas calorias, além de vitaminas A, C e do complexo B, e bastante potássio. Ajuda na saciedade e na hidratação, pois possui muita água.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/pepino.png")
     },
     {
         id: 49,
         alimento: "Água mineral",
-        descricao: "essencial para a vida: sem água nós não sobrevivemos. Ela ajuda no funcionamento do corpo, como no transporte de nutrientes e na manutenção da temperatura corporal.",
+        descricao: "Essencial para a vida: sem água nós não sobrevivemos. Ela ajuda no funcionamento do corpo, como no transporte de nutrientes e na manutenção da temperatura corporal.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/aguamineral.png")
     },
     {
         id: 50,
         alimento: "Salsicha",
-        descricao: "um enchido, ou seja, um acumulado de várias carnes. É usada em diversas receitas, principalmente no cachorro-quente. Possui muito sódio e colesterol, sendo um alimento não indicado de ser consumido em excesso.",
+        descricao: "Enchido, ou seja, um acumulado de várias carnes. É usada em diversas receitas, principalmente no cachorro-quente. Possui muito sódio e colesterol, sendo um alimento não indicado para consumo excessivo.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/salsicha.png")
     },
     {
         id: 51,
         alimento: "Bolo",
-        descricao: "gostoso e amado por todos. O bolo utiliza trigo ou fubá e ovos na sua receita básica, além de outros tipos de ingredientes, depende do sabor que você quer. Pode ser saudável ou não, depende de como é feito.",
+        descricao: "Gosto e amado por todos. O bolo utiliza trigo ou fubá e ovos na sua receita básica, além de outros ingredientes, dependendo do sabor desejado. Pode ser saudável ou não, depende de como é feito.",
         classificacao_saude: "moderado",
         path_image: require("./assets/images/alimentos/bolo.png")
     },
     {
         id: 52,
         alimento: "Amendoim",
-        descricao: "uma leguminosa muito gostosa. É rico em fibras e ótimo para os músculos, pois contém potássio e magnésio. Possui muitas calorias, então cuidado com o excesso no consumo.",
+        descricao: "Leguminosa muito gostosa. É rico em fibras e ótimo para os músculos, pois contém potássio e magnésio. Possui muitas calorias, então cuidado com o consumo excessivo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/amendoim.png")
     },
     {
         id: 53,
         alimento: "Pêssego",
-        descricao: "fruta doce e bem gostosa. É rica em fibras, sendo ótima para a digestão e para o bom funcionamento do intestino. Possui também vitamina A, C e D, além de ter baixas calorias.",
+        descricao: "Fruta doce e bem gostosa. É rica em fibras, sendo ótima para a digestão e para o bom funcionamento do intestino. Possui também vitaminas A, C e D, além de ter baixas calorias.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/pessego.png")
     },
     {
         id: 54,
         alimento: "Ketchup",
-        descricao: "molho muito gostoso à base de tomate, sendo usado em diversas receitas, como na pizza e cachorro-quente. Possui muitos conservantes, além de bastante sódio, portanto não é bom consumir em excesso.",
+        descricao: "Molho muito gostoso à base de tomate, usado em diversas receitas, como na pizza e no cachorro-quente. Possui muitos conservantes, além de bastante sódio, portanto não é bom consumir em excesso.",
         classificacao_saude: "nao_saudavel",
         path_image: require("./assets/images/alimentos/ketchup.png")
     },
     {
         id: 55,
         alimento: "Abacate",
-        descricao: "fruta muito usada e apreciada. Possui muito potássio, que é bom para os músculos, além de vitamina A, que é boa para a visão. A gordura do abacate também é ótima para o nosso corpo.",
+        descricao: "Fruta muito usada e apreciada. Possui muito potássio, que é bom para os músculos, além de vitamina A, que é boa para a visão. A gordura do abacate também é ótima para o nosso corpo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/abacate.png")
     }
-    
 ];

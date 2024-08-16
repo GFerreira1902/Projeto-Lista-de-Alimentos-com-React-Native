@@ -111,7 +111,7 @@ const HomePage = () => {
     };
 
     shuffledData.forEach((item) => {
-      if (randomizedItems[item.classificacao_saude].length < 10) {
+      if (randomizedItems[item.classificacao_saude].length < 8) {
         randomizedItems[item.classificacao_saude].push(item);
       }
     });
