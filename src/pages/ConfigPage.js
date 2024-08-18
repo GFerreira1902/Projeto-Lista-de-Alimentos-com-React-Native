@@ -7,7 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const ConfigPage = () => {
   const [showTutorial, setShowTutorial] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
-  const video = require('../../assets/images/tutorialgame/teste.mp4');
+  const video = require('../../assets/images/tutorialgame/komidinhaz_walkthrough.mp4');
   const [termsText, setTermsText] = useState('');
 
   const handleStartVideo = () => {
