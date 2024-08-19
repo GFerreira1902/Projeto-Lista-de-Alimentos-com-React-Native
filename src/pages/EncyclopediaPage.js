@@ -30,6 +30,11 @@ const EncyclopediaPage = () => {
     });
   };
 
+  useEffect(() => {
+    Speech.speak('', { language: 'pt-BR' }); // Pré-carrega o motor de voz
+  }, []);
+  
+
   const renderCard = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => { openModal(item); audioAlimento(item.alimento); }}>

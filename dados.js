@@ -383,5 +383,12 @@ export const data = [
         descricao: "Fruta muito usada e apreciada. Possui muito potássio, que é bom para os músculos, além de vitamina A, que é boa para a visão. A gordura do abacate também é ótima para o nosso corpo.",
         classificacao_saude: "saudavel",
         path_image: require("./assets/images/alimentos/abacate.png")
+    },
+    {
+        id: 56,
+        alimento: "Pão",
+        descricao: "Alimento muito gostoso e de grande fama, feito a partir da farinha de trigo. É rico em carboidratos e pode ser combinado com vários alimentos, sendo muito consumido no mundo todo.",
+        classificacao_saude: "moderado",
+        path_image: require("./assets/images/alimentos/pao.png")
     }
 ];

@@ -47,7 +47,7 @@ const HomePage = () => {
   const playSoundFeedback = async (soundFile) => {
     try {
       const { sound } = await Audio.Sound.createAsync(soundFile);
-      await sound.setRateAsync(1.7, shouldCorrectPitch = true);
+      await sound.setRateAsync(2.0, shouldCorrectPitch = true);
       await sound.playAsync();
 
       // Aguardar o término do som
