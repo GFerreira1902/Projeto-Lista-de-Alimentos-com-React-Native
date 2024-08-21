@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   video: {
     width: '80%',
     height: 300,
-    marginBottom: 200,
+    marginBottom: 320,
   },
   modalBackground: {
     flex: 1,
