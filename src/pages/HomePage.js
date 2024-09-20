@@ -339,7 +339,7 @@ const HomePage = () => {
             />
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.finishGameButton} onPress={() => setShowConfirmationModal(true)}>
-                <Text style={styles.finishGameButtonText}>Finalizar Jogo</Text>
+                <Text style={styles.finishGameButtonText}>Finalizar Rodada</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.closeButton} onPress={() => setIsModalVisible(false)}>
                 <Text style={styles.closeButtonText}>Fechar</Text>
@@ -476,7 +476,7 @@ const HomePage = () => {
       >
         <View style={styles.modalContainer}>
           <View style={[styles.modalContent, { maxHeight: windowDimensions.height * 0.4 }]}>
-            <Text style={styles.modalConfirmationText}>Tem certeza de que deseja finalizar o jogo?</Text>
+            <Text style={styles.modalConfirmationText}>Tem certeza de que deseja finalizar a rodada?</Text>
             <View style={styles.modalButtonsContainer}>
               <TouchableOpacity
                 style={[styles.modalButton, styles.confirmButton]}

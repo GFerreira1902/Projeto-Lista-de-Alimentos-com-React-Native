@@ -84,7 +84,7 @@ const InitialPage = () => {
                 shouldPlay
               />
               <TouchableOpacity style={styles.closeButton} onPress={handleTutorialClose}>
-                <Text style={styles.closeButtonText}>Fechar Tutorial</Text>
+                <Text style={styles.closeButtonText}>Fechar</Text>
               </TouchableOpacity>
             </View>
           </View>
