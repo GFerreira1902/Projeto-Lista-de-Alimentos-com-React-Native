@@ -33,7 +33,7 @@ const ConfigPage = () => {
 
   const renderTextWithStyle = (text) => {
     const lines = text.split('\n').map((line, index) => {
-      if (line.startsWith('Sobre') || line.startsWith('Aviso') || line.startsWith('Prazo') || line.startsWith('Compromisso') || line.startsWith('Desativação')) {
+      if (line.startsWith('Sobre') || line.startsWith('Aviso') || line.startsWith('Prazo') || line.startsWith('Compromisso') || line.startsWith('Informações Adicionais')) {
         return <Text key={index} style={styles.titleTerms}>{line.trim()}</Text>;
       }
       return <Text key={index} style={styles.textTerms}>{line.trim()}</Text>;
