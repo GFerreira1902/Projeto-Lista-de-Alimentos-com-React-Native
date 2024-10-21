@@ -70,7 +70,7 @@ const ConfigPage = () => {
             end={{ x: 1, y: 1 }}
             style={styles.linearGradient}
           >
-            <Text style={styles.optionText} onPress={handleStartVideo}>COMO JOGAR</Text>
+            <Text style={styles.optionText} onPress={handleStartVideo}>COMO BRINCAR</Text>
           </LinearGradient>
         </View>
         <View style={styles.optionsContainer}>

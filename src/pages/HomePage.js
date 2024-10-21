@@ -139,12 +139,6 @@ const HomePage = () => {
     return randomizedData.filter(item => selectedItems.includes(item.id));
   }, [randomizedData, selectedItems]);
 
-  const handleDeleteItem = () => {
-    setSelectedItems(prevItems => prevItems.filter(id => id !== selectedItemToDelete));
-    setSelectedItemToDelete(null);
-    setIsModalVisible(false); // Fechar a modal após excluir o item
-  };
-
   // Verifique se há itens não saudáveis selecionados
   const hasUnhealthyItems = useMemo(() => {
     return modalItemList.some(item => item.classificacao_saude === 'nao_saudavel');
@@ -163,14 +157,6 @@ const HomePage = () => {
     const healthyItems = modalItemList.filter(item => item.classificacao_saude === 'saudavel').length;
     return (healthyItems / totalSelected) * 100;
   }, [modalItemList]);
-
-  const audioAlimento = (alimento) => {
-    Speech.speak(alimento, {
-      language: 'pt-BR',
-      pitch: 1.0,
-      rate: 2.0
-    });
-  };
 
   const loadUserScore = async () => {
     try {
@@ -200,6 +186,8 @@ const HomePage = () => {
       } else if (resultGame === 'PARABÉNS, PORÉM VOCÊ PODE MELHORAR') {
         newScore += 3;
       } else if (resultGame === 'HMM, VOCÊ FEZ BOAS ESCOLHAS, MAS PODE MELHORAR SUA LISTA') {
+        newScore += 2;
+      } else if (resultGame === 'POXA, VOCÊ PODERIA SELECIONAR ALIMENTOS MAIS SAUDÁVEIS') {
         newScore += 1;
       }
 
@@ -431,7 +419,7 @@ const HomePage = () => {
                 />
                 <View style={styles.centeredContent}>
                   <Text style={styles.coinMessage}>
-                    Você Ganhou <Text style={styles.greenText}>+2</Text> Ponto!
+                    Você Ganhou <Text style={styles.greenText}>+2</Text> Pontos!
                   </Text>
                 </View>
               </>
