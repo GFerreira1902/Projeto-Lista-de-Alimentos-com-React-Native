@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { Audio } from 'expo-av';
-import * as Speech from 'expo-speech';
 import FooterBar from '../components/FooterBar';
 import { data } from '../../dados'
 
@@ -55,12 +54,11 @@ const HomePage = () => {
         if (status.didJustFinish) {
           // Mostrar o botão após o som terminar
           setIsButtonVisible(true);
-          sound.unloadAsync(); // Descarregar o som após a reprodução
+          sound.unloadAsync();
         }
       });
     } catch (error) {
       console.error('Error playing sound', error);
-      // Mostrar o botão em caso de erro
       setIsButtonVisible(true);
     }
   };

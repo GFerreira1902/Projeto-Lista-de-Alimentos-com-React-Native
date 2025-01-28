@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FooterBar from "../components/FooterBar";
 import { LinearGradient } from 'expo-linear-gradient';
